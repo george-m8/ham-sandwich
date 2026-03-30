@@ -1,0 +1,20 @@
+{
+  "containerSelector": ".site-shell, .receipt-wrapper",
+  "enableWidthTransition": true,
+  "enableHeightTransition": false,
+  "enableLineReveal": false,
+  "lineSelector": "h1, h2, h3, h4, h5, h6, p, li, dt, dd, blockquote, pre, code, label, legend, .card, .form-row, .output-box, .group-title, tr",
+  "respectReducedMotion": true,
+  "widthTransitionDuration": 900,
+  "heightTransitionDuration": 760,
+  "lineRevealDuration": 520,
+  "lineStaggerMs": 120,
+  "lineYOffsetPx": 6,
+  "containerGrowthStepDuration": 220,
+  "initialMaxHeightPx": 14,
+  "growthPaddingPx": 24,
+  "minWidthDelta": 6,
+  "minHeightDelta": 12,
+  "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+  "debug": false
+}

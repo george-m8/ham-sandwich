@@ -1,0 +1,41 @@
+{
+  "category": "licensing-and-regulations",
+  "questions": [
+    {
+      "id": "LR-001",
+      "question": "Who issues UK Amateur Radio licences?",
+      "options": [
+        { "key": "A", "text": "RSGB" },
+        { "key": "B", "text": "Ofcom" },
+        { "key": "C", "text": "British Telecom" },
+        { "key": "D", "text": "Civil Aviation Authority" }
+      ],
+      "correct": "B",
+      "reason": "Ofcom is the UK communications regulator and is responsible for issuing UK Amateur Radio licences."
+    },
+    {
+      "id": "LR-002",
+      "question": "What is the minimum age to hold a UK Foundation Amateur Radio licence?",
+      "options": [
+        { "key": "A", "text": "10 years" },
+        { "key": "B", "text": "12 years" },
+        { "key": "C", "text": "There is no minimum age" },
+        { "key": "D", "text": "16 years" }
+      ],
+      "correct": "C",
+      "reason": "There is no minimum age requirement for holding a UK Foundation licence."
+    },
+    {
+      "id": "LR-003",
+      "question": "What does your callsign identify when you transmit?",
+      "options": [
+        { "key": "A", "text": "Your radio model" },
+        { "key": "B", "text": "Your antenna type" },
+        { "key": "C", "text": "Your licence and station operator" },
+        { "key": "D", "text": "Your internet provider" }
+      ],
+      "correct": "C",
+      "reason": "A callsign uniquely identifies the licensed station/operator using the transmission."
+    }
+  ]
+}

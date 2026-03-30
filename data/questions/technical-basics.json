@@ -1,0 +1,41 @@
+{
+  "category": "technical-basics",
+  "questions": [
+    {
+      "id": "TB-001",
+      "question": "What is the unit of electrical resistance?",
+      "options": [
+        { "key": "A", "text": "Volt" },
+        { "key": "B", "text": "Ohm" },
+        { "key": "C", "text": "Ampere" },
+        { "key": "D", "text": "Watt" }
+      ],
+      "correct": "B",
+      "reason": "Resistance is measured in ohms (Ω)."
+    },
+    {
+      "id": "TB-002",
+      "question": "What does a fuse primarily protect against?",
+      "options": [
+        { "key": "A", "text": "Too little voltage" },
+        { "key": "B", "text": "Incorrect modulation" },
+        { "key": "C", "text": "Excess current" },
+        { "key": "D", "text": "Antenna mismatch" }
+      ],
+      "correct": "C",
+      "reason": "A fuse is designed to open the circuit when current exceeds a safe value."
+    },
+    {
+      "id": "TB-003",
+      "question": "If voltage is constant and resistance increases, what happens to current?",
+      "options": [
+        { "key": "A", "text": "It increases" },
+        { "key": "B", "text": "It decreases" },
+        { "key": "C", "text": "It stays the same" },
+        { "key": "D", "text": "It becomes AC" }
+      ],
+      "correct": "B",
+      "reason": "From Ohm’s law, I = V/R, so current decreases as resistance increases for constant voltage."
+    }
+  ]
+}

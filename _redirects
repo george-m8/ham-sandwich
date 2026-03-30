@@ -1,0 +1,5 @@
+/blog /radios/ 301
+/blog/ /radios/ 301
+/blog/read /radios/ 301
+/blog/read/ /radios/ 301
+/blog/read/* /radios/ 301

@@ -1,0 +1,41 @@
+{
+  "category": "operating-practices",
+  "questions": [
+    {
+      "id": "OP-001",
+      "question": "What is good practice before transmitting on a frequency?",
+      "options": [
+        { "key": "A", "text": "Transmit immediately" },
+        { "key": "B", "text": "Listen first to check the channel is clear" },
+        { "key": "C", "text": "Use maximum power" },
+        { "key": "D", "text": "Change your callsign" }
+      ],
+      "correct": "B",
+      "reason": "Listening first reduces interference and helps ensure respectful spectrum sharing."
+    },
+    {
+      "id": "OP-002",
+      "question": "How should you generally choose transmit power for a contact?",
+      "options": [
+        { "key": "A", "text": "Always maximum" },
+        { "key": "B", "text": "Use the minimum power needed for reliable communication" },
+        { "key": "C", "text": "Always 1 watt" },
+        { "key": "D", "text": "Match nearby stations regardless of need" }
+      ],
+      "correct": "B",
+      "reason": "Using minimum necessary power reduces unnecessary interference and is good operating practice."
+    },
+    {
+      "id": "OP-003",
+      "question": "In an emergency on-air, what should be your priority?",
+      "options": [
+        { "key": "A", "text": "Discuss equipment" },
+        { "key": "B", "text": "Keep transmissions brief, clear, and relevant" },
+        { "key": "C", "text": "Continue normal net chat" },
+        { "key": "D", "text": "Test different antennas" }
+      ],
+      "correct": "B",
+      "reason": "Emergency traffic should be concise and relevant so essential information is passed quickly and clearly."
+    }
+  ]
+}

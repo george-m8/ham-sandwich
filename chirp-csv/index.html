@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ham Sandwich — CHIRP CSV</title>
+  <link rel="stylesheet" href="/css/text.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/inputs.css">
+  <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+  <div class="receipt-wrapper receipt-wrapper-wide site-shell">
+    <nav class="receipt-header" id="main-nav">
+      <div class="horizontal-flex">
+        <a href="/" class="nav-logo" id="site-name">🥪 Ham Sandwich</a>
+        <div class="nav-links horizontal-flex" id="nav-links">
+          <a href="/chirp-csv/">CHIRP CSV</a>
+          <a href="/test/">Tests</a>
+          <a href="/radios/">Radios</a>
+          <a href="/links/">Links</a>
+          <a href="/account/" id="account-link">Login</a>
+        </div>
+        <button class="btn-xs nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+      </div>
+    </nav>
+
+    <main class="receipt-section">
+      <h2>CHIRP CSV Generator</h2>
+      <p class="muted">Generate CHIRP-compatible CSV channel lists using your own LLM API key.</p>
+
+      <form id="chirp-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="provider">LLM Provider</label>
+            <select id="provider" name="provider">
+              <option value="openai">OpenAI</option>
+              <option value="gemini">Google Gemini</option>
+              <option value="claude">Anthropic Claude</option>
+              <option value="grok">xAI Grok</option>
+              <option value="github">GitHub Models</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="api-key">API Key</label>
+            <input type="text" id="api-key" name="api-key" autocomplete="off" placeholder="Enter API key for selected provider" required>
+          </div>
+          <div class="form-group">
+            <label for="model">Model</label>
+            <select id="model" name="model"></select>
+            <button class="btn-secondary btn-sm" type="button" id="refresh-models-btn">Load available models</button>
+          </div>
+          <div class="form-group">
+            <label for="enable-web-search">Web Search</label>
+            <label><input type="checkbox" id="enable-web-search" checked> Enable model web search where available</label>
+            <p class="small-text" id="web-search-description">Available for selected model.</p>
+          </div>
+        </div>
+
+        <div class="horizontal-flex gap-sm action-row-center">
+          <button class="btn-secondary" type="button" id="load-session-key-btn">Load session key</button>
+          <button class="btn-secondary" type="button" id="save-account-key-btn" data-auth-action="save your API key">Save key to account</button>
+          <button class="btn-secondary" type="button" id="load-account-key-btn" data-auth-action="load your saved API key">Load key from account</button>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="freq-min">Min Frequency (MHz)</label>
+            <input type="text" id="freq-min" name="freq-min" placeholder="Any">
+          </div>
+          <div class="form-group">
+            <label for="freq-max">Max Frequency (MHz)</label>
+            <input type="text" id="freq-max" name="freq-max" placeholder="Any">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Modes</label>
+            <div class="horizontal-flex flex-wrap" id="modes-group">
+              <label><input type="checkbox" name="modes" value="FM" checked> FM</label>
+              <label><input type="checkbox" name="modes" value="AM" checked> AM</label>
+              <label><input type="checkbox" name="modes" value="DMR"> DMR</label>
+              <label><input type="checkbox" name="modes" value="SSB"> SSB</label>
+              <label><input type="checkbox" name="modes" value="CW"> CW</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="include-repeaters">Include Repeaters</label>
+            <select id="include-repeaters" name="include-repeaters">
+              <option value="yes" selected>Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Bands</label>
+            <div class="horizontal-flex flex-wrap" id="bands-group">
+              <label><input type="checkbox" name="bands" value="HF"> HF</label>
+              <label><input type="checkbox" name="bands" value="VHF" checked> VHF</label>
+              <label><input type="checkbox" name="bands" value="UHF" checked> UHF</label>
+              <label><input type="checkbox" name="bands" value="All"> All</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="location">Region / Location</label>
+            <input type="text" id="location" name="location" placeholder="Auto-detecting location…" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="num-channels">Max Channels</label>
+            <input type="text" id="num-channels" name="num-channels" placeholder="Any">
+            <p class="small-text">Leave blank for unlimited.</p>
+          </div>
+          <div class="form-group">
+            <label for="validation-level">Validation Level</label>
+            <select id="validation-level" name="validation-level">
+              <option value="none">None</option>
+              <option value="standard" selected>Standard</option>
+              <option value="strict">Strict</option>
+            </select>
+            <p class="small-text" id="validation-description">Standard checks channel shape, mode/range consistency, and duplicates.</p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prompt-template">Prompt Template</label>
+            <select id="prompt-template" name="prompt-template"></select>
+          </div>
+        </div>
+
+        <div class="horizontal-flex gap-sm action-row-center">
+          <button class="btn-secondary" type="button" id="rotate-template-btn">Rotate template</button>
+          <button class="btn-secondary" type="button" id="apply-template-btn">Apply template</button>
+        </div>
+
+        <div class="form-group">
+          <label for="prompt">Prompt</label>
+          <textarea id="prompt" name="prompt" rows="5">Interesting radio frequencies local to {location}</textarea>
+        </div>
+
+        <div class="horizontal-flex gap-sm action-row-center">
+          <button class="btn-box btn-sm" id="generate-btn" type="submit">Generate CSV</button>
+          <a class="btn-secondary" href="/chirp-csv/directory/">Open Directory →</a>
+        </div>
+      </form>
+
+      <section class="output-box" id="generation-status" aria-live="polite">Ready.</section>
+
+      <section class="output-box text-left" id="generation-actions" hidden>
+        <div class="horizontal-flex gap-sm">
+          <button class="btn-box btn-sm" id="retry-generate-btn" type="button">Try again</button>
+          <button class="btn-secondary" id="retry-next-model-btn" type="button" hidden>Try different model</button>
+          <span class="small-text" id="retry-hint"></span>
+        </div>
+      </section>
+
+      <details class="output-box text-left" id="debug-panel" hidden>
+        <summary>Optional debug details</summary>
+        <pre id="debug-output" class="small-text"></pre>
+      </details>
+
+      <section class="output-box text-left" id="validation-report-wrap">
+        <h3>Validation Report</h3>
+        <div id="validation-report">No generation yet.</div>
+      </section>
+
+      <section class="output-box text-left" id="preview-wrap">
+        <h3>CSV Preview</h3>
+        <div id="preview-table-wrap">No channels generated yet.</div>
+        <div class="horizontal-flex gap-sm action-row-center">
+          <button class="btn-secondary" id="download-btn" type="button" disabled>Download CSV</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="receipt-footer">
+      <p class="small-text">Ham Sandwich — Amateur Radio Tools</p>
+      <div class="horizontal-flex gap-sm support-links" id="support-links"></div>
+      <p class="small-text light-text">© <span id="footer-year">2026</span></p>
+    </footer>
+  </div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/key-store.js"></script>
+  <script src="/js/chirp-csv.js"></script>
+</body>
+</html>

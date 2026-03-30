@@ -1,0 +1,54 @@
+{
+  "linkGroups": [
+    {
+      "title": "Official Resources",
+      "links": [
+        {
+          "name": "Ofcom Amateur Radio",
+          "url": "https://www.ofcom.org.uk/manage-your-licence/radiocommunication-licences/amateur-radio",
+          "description": "UK amateur radio licensing information"
+        },
+        {
+          "name": "RSGB",
+          "url": "https://rsgb.org",
+          "description": "Radio Society of Great Britain"
+        }
+      ]
+    },
+    {
+      "title": "Tools",
+      "links": [
+        {
+          "name": "CHIRP",
+          "url": "https://chirpmyradio.com/projects/chirp/wiki/Home",
+          "description": "Open-source radio programming software"
+        },
+        {
+          "name": "RepeaterBook",
+          "url": "https://www.repeaterbook.com",
+          "description": "Global repeater directory"
+        },
+        {
+          "name": "QRZ",
+          "url": "https://www.qrz.com",
+          "description": "Callsign lookup and radio community"
+        }
+      ]
+    },
+    {
+      "title": "Learning",
+      "links": [
+        {
+          "name": "Essex Ham",
+          "url": "https://www.essexham.co.uk",
+          "description": "Training and guides for UK radio licences"
+        },
+        {
+          "name": "HamStudy",
+          "url": "https://hamstudy.org",
+          "description": "Exam prep practice platform"
+        }
+      ]
+    }
+  ]
+}

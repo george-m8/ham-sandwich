@@ -1,0 +1,16 @@
+.receipt-js-revealing {
+  overflow: hidden;
+}
+
+.receipt-js-line-pre {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(var(--receipt-js-line-offset, 6px));
+  will-change: max-height, opacity, transform;
+}
+
+.receipt-js-line-show {
+  opacity: 1;
+  transform: translateY(0);
+}

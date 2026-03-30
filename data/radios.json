@@ -1,0 +1,85 @@
+{
+  "radios": [
+    {
+      "slug": "baofeng-uv-5r",
+      "name": "Baofeng UV-5R",
+      "image": "https://placehold.co/320x220?text=Baofeng+UV-5R",
+      "description": "Popular budget dual-band handheld that is widely used by beginners.",
+      "bands": ["VHF", "UHF"],
+      "price_range": "£20–£35",
+      "price_min_gbp": 20,
+      "price_max_gbp": 35,
+      "affiliate_url": "https://www.amazon.co.uk/s?k=baofeng+uv-5r",
+      "tags": ["handheld", "dual-band", "budget", "beginner"],
+      "sections": [
+        {
+          "heading": "Why operators start here",
+          "body": "Low entry cost and broad community usage make this one of the most common first handheld radios."
+        },
+        {
+          "heading": "What to expect",
+          "body": "Great value for local FM use, though you should expect a basic interface and simple build quality."
+        }
+      ],
+      "specs": [
+        { "name": "Bands", "value": "VHF / UHF" },
+        { "name": "Power", "value": "Up to 5W" },
+        { "name": "Type", "value": "Handheld" }
+      ]
+    },
+    {
+      "slug": "yaesu-ft-65",
+      "name": "Yaesu FT-65",
+      "image": "https://placehold.co/320x220?text=Yaesu+FT-65",
+      "description": "Robust entry-level handheld from a well-known manufacturer.",
+      "bands": ["VHF", "UHF"],
+      "price_range": "£90–£130",
+      "price_min_gbp": 90,
+      "price_max_gbp": 130,
+      "affiliate_url": "https://www.hamradio.co.uk/search?controller=search&s=yaesu+ft-65",
+      "tags": ["handheld", "reliable", "beginner"],
+      "sections": [
+        {
+          "heading": "Who this is for",
+          "body": "Ideal for new licence holders who want dependable operation and better ergonomics than ultra-budget models."
+        },
+        {
+          "heading": "Field notes",
+          "body": "Clear audio and straightforward controls make this a practical daily radio for repeaters and simplex."
+        }
+      ],
+      "specs": [
+        { "name": "Bands", "value": "VHF / UHF" },
+        { "name": "Power", "value": "Up to 5W" },
+        { "name": "Type", "value": "Handheld" }
+      ]
+    },
+    {
+      "slug": "anytone-at-d878uvii-plus",
+      "name": "Anytone AT-D878UVII Plus",
+      "image": "https://placehold.co/320x220?text=Anytone+D878",
+      "description": "Feature-rich handheld for operators wanting both analogue and DMR.",
+      "bands": ["VHF", "UHF", "DMR"],
+      "price_range": "£260–£320",
+      "price_min_gbp": 260,
+      "price_max_gbp": 320,
+      "affiliate_url": "https://www.radioddity.com/products/anytone-at-d878uvii-plus",
+      "tags": ["dmr", "advanced", "handheld"],
+      "sections": [
+        {
+          "heading": "Why it stands out",
+          "body": "Strong DMR capability and extensive configuration make it a versatile step-up for experienced users."
+        },
+        {
+          "heading": "Before buying",
+          "body": "Expect a deeper setup process and codeplug work compared with entry-level analog-only radios."
+        }
+      ],
+      "specs": [
+        { "name": "Bands", "value": "VHF / UHF" },
+        { "name": "Modes", "value": "FM + DMR" },
+        { "name": "Type", "value": "Handheld" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ham Sandwich — Radios</title>
+  <link rel="stylesheet" href="/css/text.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/inputs.css">
+  <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+  <div class="receipt-wrapper receipt-wrapper-wide site-shell">
+    <nav class="receipt-header" id="main-nav">
+      <div class="horizontal-flex">
+        <a href="/" class="nav-logo" id="site-name">🥪 Ham Sandwich</a>
+        <div class="nav-links horizontal-flex" id="nav-links">
+          <a href="/chirp-csv/">CHIRP CSV</a>
+          <a href="/test/">Tests</a>
+          <a href="/radios/">Radios</a>
+          <a href="/links/">Links</a>
+          <a href="/account/" id="account-link">Login</a>
+        </div>
+        <button class="btn-xs nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+      </div>
+    </nav>
+
+    <main class="receipt-section">
+      <h2>Recommended Radios</h2>
+
+      <section class="radios-controls card" aria-label="Radio filters">
+        <div>
+          <p class="small-text">Browse by tags:</p>
+          <div id="radio-top-tags" class="tag-list" aria-live="polite"></div>
+        </div>
+        <div class="filter-grid">
+          <div class="form-group">
+            <label for="radio-search">Search</label>
+            <input id="radio-search" type="text" placeholder="Name, description, tags">
+          </div>
+          <div class="form-group">
+            <label for="radio-currency">Currency</label>
+            <select id="radio-currency">
+              <option value="GBP">GBP</option>
+              <option value="EUR">EUR</option>
+              <option value="USD">USD</option>
+              <option value="CAD">CAD</option>
+              <option value="AUD">AUD</option>
+              <option value="JPY">JPY</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Bands (choose multiple)</label>
+            <div id="radio-band-options" class="multi-options" aria-live="polite"></div>
+          </div>
+          <div class="form-group price-filter-group">
+            <label>Price Range</label>
+            <div class="horizontal-flex space-between price-labels">
+              <span id="radio-price-min-label" class="small-text">Min</span>
+              <span id="radio-price-max-label" class="small-text">Max</span>
+            </div>
+            <div class="price-fallback-selects">
+              <div class="form-group">
+                <label for="radio-price-min-select">Min Price</label>
+                <select id="radio-price-min-select"></select>
+              </div>
+              <div class="form-group">
+                <label for="radio-price-max-select">Max Price</label>
+                <select id="radio-price-max-select"></select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group filters-status-group">
+            <label>Active Filters</label>
+            <div id="radio-active-filters" class="tag-list" aria-live="polite"></div>
+            <button id="radio-reset-filters" type="button" class="btn-secondary btn-sm">Reset Filters</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="radios-detail" class="cards-grid" aria-live="polite"></section>
+      <div id="radios-list" class="cards-grid" aria-live="polite"></div>
+    </main>
+
+    <footer class="receipt-footer">
+      <p class="small-text">Ham Sandwich — Amateur Radio Tools</p>
+      <div class="horizontal-flex gap-sm support-links" id="support-links"></div>
+      <p class="small-text light-text">© <span id="footer-year">2026</span></p>
+    </footer>
+  </div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/radios.js"></script>
+</body>
+</html>

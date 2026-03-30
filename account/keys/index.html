@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ham Sandwich — API Keys</title>
+  <link rel="stylesheet" href="/css/text.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/inputs.css">
+  <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+  <div class="receipt-wrapper site-shell">
+    <nav class="receipt-header" id="main-nav">
+      <div class="horizontal-flex">
+        <a href="/" class="nav-logo" id="site-name">🥪 Ham Sandwich</a>
+        <div class="nav-links horizontal-flex" id="nav-links">
+          <a href="/chirp-csv/">CHIRP CSV</a>
+          <a href="/test/">Tests</a>
+          <a href="/radios/">Radios</a>
+          <a href="/links/">Links</a>
+          <a href="/account/" id="account-link">Login</a>
+        </div>
+        <button class="btn-xs nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+      </div>
+    </nav>
+
+    <main class="receipt-section">
+      <h2>Manage API Keys</h2>
+      <p class="muted">Save provider keys to your account and load them into the CHIRP generator.</p>
+
+      <form id="account-keys-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="keys-provider">Provider</label>
+            <select id="keys-provider">
+              <option value="openai">OpenAI</option>
+              <option value="gemini">Google Gemini</option>
+              <option value="claude">Anthropic Claude</option>
+              <option value="grok">xAI Grok</option>
+              <option value="github">GitHub Models</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="keys-api-key">API Key</label>
+            <input type="text" id="keys-api-key" placeholder="Paste API key for selected provider">
+          </div>
+        </div>
+        <div class="horizontal-flex gap-sm action-row-center">
+          <button type="button" class="btn-box btn-sm" id="keys-save-account-btn">Save to Account</button>
+          <button type="button" class="btn-secondary" id="keys-load-account-btn">Load from Account</button>
+          <button type="button" class="btn-secondary" id="keys-delete-account-btn">Delete Saved Key</button>
+        </div>
+      </form>
+
+      <section class="output-box text-left" id="keys-status" aria-live="polite">Login required for account key storage.</section>
+      <section class="output-box text-left" id="keys-list"></section>
+    </main>
+
+    <footer class="receipt-footer">
+      <p class="small-text">Ham Sandwich — Amateur Radio Tools</p>
+      <div class="horizontal-flex gap-sm support-links" id="support-links"></div>
+      <p class="small-text light-text">© <span id="footer-year">2026</span></p>
+    </footer>
+  </div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/key-store.js"></script>
+  <script src="/js/account-keys.js"></script>
+</body>
+</html>

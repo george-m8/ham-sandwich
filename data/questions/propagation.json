@@ -1,0 +1,41 @@
+{
+  "category": "propagation",
+  "questions": [
+    {
+      "id": "PR-001",
+      "question": "Which band generally provides longer distance ground-wave communication than VHF/UHF?",
+      "options": [
+        { "key": "A", "text": "HF" },
+        { "key": "B", "text": "Microwave" },
+        { "key": "C", "text": "UHF only" },
+        { "key": "D", "text": "SHF" }
+      ],
+      "correct": "A",
+      "reason": "HF signals can travel much further and may also use ionospheric propagation for long-distance contacts."
+    },
+    {
+      "id": "PR-002",
+      "question": "What is the most likely effect of a high, clear line-of-sight path at VHF?",
+      "options": [
+        { "key": "A", "text": "Lower range than with obstructions" },
+        { "key": "B", "text": "Improved range" },
+        { "key": "C", "text": "No effect" },
+        { "key": "D", "text": "Forces AM operation" }
+      ],
+      "correct": "B",
+      "reason": "VHF/UHF communications are strongly dependent on line-of-sight; fewer obstructions usually improves range."
+    },
+    {
+      "id": "PR-003",
+      "question": "During strong tropospheric conditions, what can happen on VHF/UHF?",
+      "options": [
+        { "key": "A", "text": "Signals may travel unusually long distances" },
+        { "key": "B", "text": "Signals stop propagating entirely" },
+        { "key": "C", "text": "Only CW can be used" },
+        { "key": "D", "text": "Antenna SWR always improves" }
+      ],
+      "correct": "A",
+      "reason": "Temperature inversions and ducting can allow VHF/UHF signals to travel much further than normal."
+    }
+  ]
+}

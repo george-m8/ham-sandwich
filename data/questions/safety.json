@@ -1,0 +1,41 @@
+{
+  "category": "safety",
+  "questions": [
+    {
+      "id": "SF-001",
+      "question": "What should you do before working on an antenna system?",
+      "options": [
+        { "key": "A", "text": "Increase transmitter power" },
+        { "key": "B", "text": "Disconnect power and prevent reconnection" },
+        { "key": "C", "text": "Only wear headphones" },
+        { "key": "D", "text": "Switch to a higher band" }
+      ],
+      "correct": "B",
+      "reason": "Isolating and securing power is a primary safety step before working on antennas and feeders."
+    },
+    {
+      "id": "SF-002",
+      "question": "Why should antennas be kept clear of overhead power lines?",
+      "options": [
+        { "key": "A", "text": "To improve SWR" },
+        { "key": "B", "text": "To prevent dangerous electric shock" },
+        { "key": "C", "text": "To reduce battery drain" },
+        { "key": "D", "text": "To avoid microphone feedback" }
+      ],
+      "correct": "B",
+      "reason": "Contact with overhead electrical lines can be fatal; safe separation must always be maintained."
+    },
+    {
+      "id": "SF-003",
+      "question": "What is the safest action during a thunderstorm when using an outdoor antenna?",
+      "options": [
+        { "key": "A", "text": "Continue operating at low power" },
+        { "key": "B", "text": "Operate only on VHF" },
+        { "key": "C", "text": "Disconnect equipment and stop operating" },
+        { "key": "D", "text": "Use AM mode only" }
+      ],
+      "correct": "C",
+      "reason": "Lightning risk makes operation unsafe; equipment should be disconnected and operation stopped."
+    }
+  ]
+}

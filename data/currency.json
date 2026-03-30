@@ -1,0 +1,11 @@
+{
+  "supported": ["GBP", "EUR", "USD", "CAD", "AUD", "JPY"],
+  "step_multiplier": {
+    "GBP": 1,
+    "EUR": 1,
+    "USD": 1,
+    "CAD": 1,
+    "AUD": 1,
+    "JPY": 10
+  }
+}

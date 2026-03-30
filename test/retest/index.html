@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ham Sandwich — Retest</title>
+  <link rel="stylesheet" href="/css/text.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/inputs.css">
+  <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+  <div class="receipt-wrapper site-shell">
+    <nav class="receipt-header" id="main-nav">
+      <div class="horizontal-flex">
+        <a href="/" class="nav-logo" id="site-name">🥪 Ham Sandwich</a>
+        <div class="nav-links horizontal-flex" id="nav-links">
+          <a href="/chirp-csv/">CHIRP CSV</a>
+          <a href="/test/">Tests</a>
+          <a href="/radios/">Radios</a>
+          <a href="/links/">Links</a>
+          <a href="/account/" id="account-link">Login</a>
+        </div>
+        <button class="btn-xs nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+      </div>
+    </nav>
+
+    <main class="receipt-section" data-test-app data-test-mode="retest">
+      <h2>Retest Wrong Answers</h2>
+
+      <section id="test-setup">
+        <p>Choose retest source:</p>
+        <div class="output-box text-left vertical-flex">
+          <div class="horizontal-flex gap-sm">
+            <button id="test-session-retest-btn" class="btn-box btn-sm" type="button">Retest This Session</button>
+            <button
+              id="test-history-retest-btn"
+              class="btn-secondary"
+              type="button"
+              data-auth-action="load historical wrong answers"
+            >
+              Load Historical Wrong Answers
+            </button>
+          </div>
+          <p class="small-text muted">Session retest works for all users. Historical retest requires login.</p>
+        </div>
+        <p id="test-setup-status" class="small-text muted"></p>
+      </section>
+
+      <section id="test-runtime" hidden>
+        <div class="horizontal-flex test-topbar">
+          <p id="test-progress-meta" class="small-text">Question 1 of 1</p>
+          <p id="test-timer-wrap" class="small-text" hidden>⏱ <span id="test-timer">00:00</span></p>
+        </div>
+        <progress id="test-progress" max="100" value="0"></progress>
+
+        <div id="test-question-box" class="output-box text-left"></div>
+        <div id="test-feedback-box" class="output-box text-left" hidden></div>
+
+        <div class="horizontal-flex gap-sm test-nav-row">
+          <button id="test-next-btn" class="btn-box btn-sm" type="button" hidden>Next Question →</button>
+          <button id="test-submit-btn" class="btn-secondary" type="button" hidden>Finish Now</button>
+        </div>
+        <p id="test-status" class="small-text muted"></p>
+      </section>
+
+      <section id="test-results" hidden>
+        <div id="test-results-box" class="output-box text-left"></div>
+      </section>
+    </main>
+
+    <footer class="receipt-footer">
+      <p class="small-text">Ham Sandwich — Amateur Radio Tools</p>
+      <div class="horizontal-flex gap-sm support-links" id="support-links"></div>
+      <p class="small-text light-text">© <span id="footer-year">2026</span></p>
+    </footer>
+  </div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/test.js"></script>
+</body>
+</html>

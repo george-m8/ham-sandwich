@@ -1,0 +1,122 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function validCsvMetadata(meta) {
+      return meta is map
+        && meta.keys().hasOnly([
+          'num_channels',
+          'freq_min',
+          'freq_max',
+          'modes',
+          'includes_repeaters',
+          'bands',
+          'location',
+          'llm_provider',
+          'llm_model',
+          'validation_level',
+          'web_search_enabled'
+        ])
+        && meta.num_channels is int
+        && (meta.freq_min == null || meta.freq_min is number)
+        && (meta.freq_max == null || meta.freq_max is number)
+        && meta.modes is list
+        && meta.includes_repeaters is bool
+        && meta.bands is list
+        && meta.location is string
+        && meta.llm_provider is string
+        && meta.llm_model is string
+        && meta.validation_level is string
+        && meta.web_search_enabled is bool;
+    }
+
+    function validCsvCreate() {
+      let data = request.resource.data;
+      return data.keys().hasOnly([
+        'id',
+        'title',
+        'description',
+        'csv_storage_path',
+        'csv_download_url',
+        'metadata',
+        'created_at',
+        'created_by',
+        'download_count',
+        'tags',
+        'preview_channels'
+      ])
+      && data.id is string
+      && data.title is string
+      && data.description is string
+      && data.csv_storage_path is string
+      && (!('csv_download_url' in data) || data.csv_download_url is string)
+      && validCsvMetadata(data.metadata)
+      && data.created_at is string
+      && (data.created_by == null || (signedIn() && data.created_by == request.auth.uid))
+      && data.download_count is int
+      && data.tags is list
+      && data.preview_channels is list;
+    }
+
+    function validCsvDownloadCountUpdate() {
+      return request.resource.data.diff(resource.data).changedKeys().hasOnly(['download_count'])
+        && request.resource.data.download_count is int
+        && request.resource.data.download_count == resource.data.download_count + 1;
+    }
+
+    function validCsvOwnerAnonymize() {
+      return signedIn()
+        && resource.data.created_by == request.auth.uid
+        && request.resource.data.diff(resource.data).changedKeys().hasOnly(['created_by'])
+        && request.resource.data.created_by == null;
+    }
+
+    match /csv_directory/{csvId} {
+      allow read: if true;
+      allow create: if validCsvCreate();
+      allow update: if validCsvDownloadCountUpdate() || validCsvOwnerAnonymize();
+      allow delete: if signedIn() && resource.data.created_by == request.auth.uid;
+    }
+
+    match /users/{userId}/profile {
+      allow read, create, update: if isOwner(userId);
+      allow delete: if false;
+    }
+
+    match /users/{userId}/api_keys/{provider} {
+      allow read, write: if isOwner(userId);
+    }
+
+    match /users/{userId}/saved_csvs/{csvId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    match /users/{userId}/favourites/{csvId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    match /users/{userId}/test_results/{resultId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    match /users/{userId}/question_stats/{questionId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    match /site_config/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

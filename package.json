@@ -1,0 +1,18 @@
+{
+  "name": "ham-sandwich",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ham Sandwich static site with Cloudflare Pages Functions",
+  "scripts": {
+    "sync:receipt-css": "bash ./scripts/sync-receipt-css.sh",
+    "sync:receipt-js": "bash ./scripts/sync-receipt-js.sh",
+    "sync:shared": "npm run sync:receipt-css && npm run sync:receipt-js",
+    "predev": "npm run sync:shared",
+    "dev": "wrangler pages dev ./ --port 8788 --ip 0.0.0.0 --live-reload",
+    "start": "npm run dev",
+    "build": "npm run sync:shared && echo Static site ready"
+  },
+  "devDependencies": {
+    "wrangler": "^4.10.0"
+  }
+}

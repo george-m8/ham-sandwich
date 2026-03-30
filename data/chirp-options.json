@@ -1,0 +1,144 @@
+{
+  "providers": {
+    "openai": {
+      "label": "OpenAI",
+      "models": [
+        {
+          "id": "gpt-5-mini",
+          "label": "gpt-5-mini",
+          "web_search_available": true
+        },
+        {
+          "id": "gpt-5",
+          "label": "gpt-5",
+          "web_search_available": true
+        },
+        {
+          "id": "gpt-4o",
+          "label": "gpt-4o",
+          "web_search_available": false
+        },
+        {
+          "id": "gpt-4o-mini",
+          "label": "gpt-4o-mini",
+          "web_search_available": false
+        }
+      ],
+      "default_model": "gpt-5-mini"
+    },
+    "gemini": {
+      "label": "Google Gemini",
+      "models": [
+        {
+          "id": "gemini-2.5-pro",
+          "label": "gemini-2.5-pro",
+          "web_search_available": true
+        },
+        {
+          "id": "gemini-2.0-flash",
+          "label": "gemini-2.0-flash",
+          "web_search_available": true
+        },
+        {
+          "id": "gemini-2.0-flash-lite",
+          "label": "gemini-2.0-flash-lite",
+          "web_search_available": true
+        }
+      ],
+      "default_model": "gemini-2.0-flash"
+    },
+    "claude": {
+      "label": "Anthropic Claude",
+      "models": [
+        {
+          "id": "claude-sonnet-4-20250514",
+          "label": "claude-sonnet-4-20250514",
+          "web_search_available": true
+        },
+        {
+          "id": "claude-3.5-haiku",
+          "label": "claude-3.5-haiku",
+          "web_search_available": false
+        }
+      ],
+      "default_model": "claude-sonnet-4-20250514"
+    },
+    "grok": {
+      "label": "xAI Grok",
+      "models": [
+        {
+          "id": "grok-3",
+          "label": "grok-3",
+          "web_search_available": true
+        },
+        {
+          "id": "grok-3-mini",
+          "label": "grok-3-mini",
+          "web_search_available": true
+        }
+      ],
+      "default_model": "grok-3-mini"
+    },
+    "github": {
+      "label": "GitHub Models",
+      "models": [
+        {
+          "id": "gpt-4.1-mini",
+          "label": "gpt-4.1-mini",
+          "web_search_available": false
+        },
+        {
+          "id": "gpt-4.1",
+          "label": "gpt-4.1",
+          "web_search_available": false
+        },
+        {
+          "id": "gpt-4.1-nano",
+          "label": "gpt-4.1-nano",
+          "web_search_available": false
+        },
+        {
+          "id": "gpt-4o-mini",
+          "label": "gpt-4o-mini",
+          "web_search_available": false
+        },
+        {
+          "id": "gpt-4o",
+          "label": "gpt-4o",
+          "web_search_available": false
+        },
+        {
+          "id": "Meta-Llama-3.1-8B-Instruct",
+          "label": "Meta-Llama-3.1-8B-Instruct",
+          "web_search_available": false
+        },
+        {
+          "id": "Meta-Llama-3.1-70B-Instruct",
+          "label": "Meta-Llama-3.1-70B-Instruct",
+          "web_search_available": false
+        },
+        {
+          "id": "Mistral-large-2411",
+          "label": "Mistral-large-2411",
+          "web_search_available": false
+        },
+        {
+          "id": "Phi-3.5-mini-instruct",
+          "label": "Phi-3.5-mini-instruct",
+          "web_search_available": false
+        }
+      ],
+      "default_model": "gpt-4.1-mini"
+    }
+  },
+  "prompt_templates": [
+    "Interesting radio frequencies local to {location}, including a balanced mix of practical and hobby listening channels.",
+    "Popular railway radio frequencies used in and around {location}, with practical notes where available.",
+    "Busy radio frequencies around {location} that are useful for everyday scanning and monitoring.",
+    "Emergency services and public safety related listening frequencies near {location}, only where lawful and publicly documented.",
+    "Best starter frequencies for a new ham operator in {location}, prioritising common calling and activity channels.",
+    "Weekend radio activity frequencies around {location} for events, nets, repeaters, and general operation.",
+    "Travel-focused frequencies that would be useful when visiting {location}, grouped by likely usefulness.",
+    "Preparedness and utility monitoring frequencies around {location} that are commonly cited by amateur operators."
+  ]
+}

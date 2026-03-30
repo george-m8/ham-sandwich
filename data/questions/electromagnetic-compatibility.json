@@ -1,0 +1,41 @@
+{
+  "category": "electromagnetic-compatibility",
+  "questions": [
+    {
+      "id": "EC-001",
+      "question": "What does EMC stand for?",
+      "options": [
+        { "key": "A", "text": "Electrical Mode Control" },
+        { "key": "B", "text": "Emergency Mic Check" },
+        { "key": "C", "text": "Electromagnetic Compatibility" },
+        { "key": "D", "text": "Electronic Matching Circuit" }
+      ],
+      "correct": "C",
+      "reason": "EMC means Electromagnetic Compatibility, ensuring equipment coexists without unacceptable interference."
+    },
+    {
+      "id": "EC-002",
+      "question": "If your station causes interference to nearby equipment, what is a sensible first action?",
+      "options": [
+        { "key": "A", "text": "Ignore it" },
+        { "key": "B", "text": "Investigate your station setup and reduce the cause" },
+        { "key": "C", "text": "Increase power" },
+        { "key": "D", "text": "Change your callsign" }
+      ],
+      "correct": "B",
+      "reason": "You should investigate responsibly: check grounding, feeders, filtering, and operating conditions to reduce interference."
+    },
+    {
+      "id": "EC-003",
+      "question": "Which measure can help reduce unwanted RF on cables in a home station?",
+      "options": [
+        { "key": "A", "text": "Ferrite chokes" },
+        { "key": "B", "text": "Higher speech compression" },
+        { "key": "C", "text": "Using only battery power" },
+        { "key": "D", "text": "Turning squelch off" }
+      ],
+       "correct": "A",
+       "reason": "Ferrite chokes can suppress common-mode RF currents on leads and help mitigate EMC issues."
+     }
+   ]
+ }

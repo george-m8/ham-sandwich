@@ -1,0 +1,64 @@
+{
+  "rules": [
+    {
+      "id": "no-valid-channels",
+      "match": {
+        "contains": [
+          "No valid channels after validation"
+        ]
+      },
+      "retryable": true,
+      "action_label": "Try again",
+      "hint": "The model returned channels that did not pass validation. Try adjusting mode/frequency filters or switch template/model."
+    },
+    {
+      "id": "strict-validation",
+      "match": {
+        "contains": [
+          "Strict validation rejected"
+        ]
+      },
+      "retryable": true,
+      "action_label": "Try again",
+      "hint": "Strict mode rejected uncertain channels. You can retry or use Standard validation."
+    },
+    {
+      "id": "rate-limit-429",
+      "match": {
+        "status_codes": [429],
+        "contains": [
+          "rate-limited",
+          "Rate limit"
+        ]
+      },
+      "retryable": true,
+      "action_label": "Try again",
+      "hint": "Provider rate limited this request. Wait a moment and retry."
+    },
+    {
+      "id": "provider-5xx",
+      "match": {
+        "status_codes": [500, 502, 503, 504]
+      },
+      "retryable": true,
+      "action_label": "Try again",
+      "hint": "Provider/service issue. Retry should often succeed."
+    },
+    {
+      "id": "unknown-model",
+      "match": {
+        "contains": [
+          "unknown_model",
+          "Unknown model"
+        ]
+      },
+      "retryable": true,
+      "action_label": "Try again",
+      "hint": "Selected model is not available for this provider/key.",
+      "secondary_action": {
+        "type": "next_model",
+        "label": "Try different model"
+      }
+    }
+  ]
+}

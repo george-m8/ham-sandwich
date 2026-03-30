@@ -1,0 +1,41 @@
+{
+  "category": "antennas-feeders",
+  "questions": [
+    {
+      "id": "AF-001",
+      "question": "What does SWR stand for?",
+      "options": [
+        { "key": "A", "text": "Signal Wave Ratio" },
+        { "key": "B", "text": "Standing Wave Ratio" },
+        { "key": "C", "text": "Sideband Width Range" },
+        { "key": "D", "text": "Station Wattage Reading" }
+      ],
+      "correct": "B",
+      "reason": "SWR means Standing Wave Ratio and indicates how well the antenna system is matched."
+    },
+    {
+      "id": "AF-002",
+      "question": "Why are feeder cables usually kept as short as practical?",
+      "options": [
+        { "key": "A", "text": "To increase battery life only" },
+        { "key": "B", "text": "To reduce signal loss in the cable" },
+        { "key": "C", "text": "To force FM operation" },
+        { "key": "D", "text": "To lower antenna height" }
+      ],
+      "correct": "B",
+      "reason": "Longer feeders generally have greater loss, so keeping them reasonably short helps preserve signal power."
+    },
+    {
+      "id": "AF-003",
+      "question": "What is a key advantage of mounting a VHF/UHF antenna higher?",
+      "options": [
+        { "key": "A", "text": "Lower operating frequency" },
+        { "key": "B", "text": "Improved line-of-sight coverage" },
+        { "key": "C", "text": "Automatic EMC compliance" },
+        { "key": "D", "text": "Eliminates all feeder loss" }
+      ],
+      "correct": "B",
+      "reason": "Higher antennas usually improve line-of-sight paths and coverage at VHF/UHF."
+    }
+  ]
+}

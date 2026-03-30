@@ -1,0 +1,41 @@
+{
+  "category": "transmitters-receivers",
+  "questions": [
+    {
+      "id": "TR-001",
+      "question": "What does PTT stand for on a handheld radio?",
+      "options": [
+        { "key": "A", "text": "Push To Talk" },
+        { "key": "B", "text": "Power Tune Test" },
+        { "key": "C", "text": "Pulse Time Transfer" },
+        { "key": "D", "text": "Program To Transmit" }
+      ],
+      "correct": "A",
+      "reason": "PTT means Push To Talk and keys the transmitter while pressed."
+    },
+    {
+      "id": "TR-002",
+      "question": "What is the purpose of a squelch control?",
+      "options": [
+        { "key": "A", "text": "Increase transmit power" },
+        { "key": "B", "text": "Mute noise when no valid signal is present" },
+        { "key": "C", "text": "Tune the antenna" },
+        { "key": "D", "text": "Select frequency step" }
+      ],
+      "correct": "B",
+      "reason": "Squelch keeps the speaker quiet until a signal above threshold is received."
+    },
+    {
+      "id": "TR-003",
+      "question": "What can happen if you transmit without a suitable load or antenna connected?",
+      "options": [
+        { "key": "A", "text": "Audio quality improves" },
+        { "key": "B", "text": "No change" },
+        { "key": "C", "text": "Possible transmitter damage" },
+        { "key": "D", "text": "Battery charges faster" }
+      ],
+      "correct": "C",
+      "reason": "Without a proper load, reflected power can stress and damage transmitter output stages."
+    }
+  ]
+}

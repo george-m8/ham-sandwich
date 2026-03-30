@@ -1,0 +1,22 @@
+{
+  "links": [
+    {
+      "name": "Buy Me a Coffee",
+      "url": "https://buymeacoffee.com",
+      "icon": "☕",
+      "display": "footer,links"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/george-m8/ham-sandwich",
+      "icon": "🐙",
+      "display": "footer,links"
+    },
+    {
+      "name": "QRZ Profile",
+      "url": "https://www.qrz.com",
+      "icon": "📻",
+      "display": "links"
+    }
+  ]
+}
