@@ -7,7 +7,7 @@
 .dev.vars.*
 
 # LLM context/prompt files
-LLM/
+#LLM/
 
 # Node
 node_modules/
