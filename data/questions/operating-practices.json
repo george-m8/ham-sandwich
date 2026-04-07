@@ -36,6 +36,114 @@
       ],
       "correct": "B",
       "reason": "Emergency traffic should be concise and relevant so essential information is passed quickly and clearly."
+    },
+    {
+      "id": "OP-004",
+      "question": "Why is it helpful to use the phonetic alphabet when giving a callsign?",
+      "options": [
+        { "key": "A", "text": "It makes the transmitter cooler" },
+        { "key": "B", "text": "It helps reduce misunderstandings" },
+        { "key": "C", "text": "It increases antenna gain" },
+        { "key": "D", "text": "It changes FM into AM" }
+      ],
+      "correct": "B",
+      "reason": "Phonetics make letters easier to copy accurately, especially in noisy or weak-signal conditions."
+    },
+    {
+      "id": "OP-005",
+      "question": "What is good practice when using a repeater?",
+      "options": [
+        { "key": "A", "text": "Transmit continuously without pauses" },
+        { "key": "B", "text": "Leave short pauses between overs" },
+        { "key": "C", "text": "Use the highest power regardless of need" },
+        { "key": "D", "text": "Avoid identifying your station" }
+      ],
+      "correct": "B",
+      "reason": "Short pauses let others join in and allow the repeater to reset properly between transmissions."
+    },
+    {
+      "id": "OP-006",
+      "question": "If you find a frequency already in use, what should you normally do?",
+      "options": [
+        { "key": "A", "text": "Transmit over the existing users" },
+        { "key": "B", "text": "Move to another clear frequency or wait" },
+        { "key": "C", "text": "Increase power until they stop" },
+        { "key": "D", "text": "Whistle into the microphone" }
+      ],
+      "correct": "B",
+      "reason": "Good operating practice means avoiding interference and sharing frequencies courteously."
+    },
+    {
+      "id": "OP-007",
+      "question": "What is the purpose of calling CQ?",
+      "options": [
+        { "key": "A", "text": "To announce an emergency only" },
+        { "key": "B", "text": "To invite any station to make contact" },
+        { "key": "C", "text": "To close down a station" },
+        { "key": "D", "text": "To request a repeater shutdown" }
+      ],
+      "correct": "B",
+      "reason": "CQ is a general call inviting other stations to respond."
+    },
+    {
+      "id": "OP-008",
+      "question": "Why should you avoid very long overs during a net or repeater QSO?",
+      "options": [
+        { "key": "A", "text": "To keep the PA hot" },
+        { "key": "B", "text": "To allow breaks and participation by others" },
+        { "key": "C", "text": "To force simplex operation" },
+        { "key": "D", "text": "To reduce receive sensitivity" }
+      ],
+      "correct": "B",
+      "reason": "Shorter overs and pauses improve flow and allow others to join or pass priority traffic."
+    },
+    {
+      "id": "OP-009",
+      "question": "What is a good response if another operator reports your audio is distorted?",
+      "options": [
+        { "key": "A", "text": "Ignore the report" },
+        { "key": "B", "text": "Check microphone gain and station settings" },
+        { "key": "C", "text": "Increase power immediately" },
+        { "key": "D", "text": "Change callsign" }
+      ],
+      "correct": "B",
+      "reason": "Checking settings after a credible report is good operating practice and reduces interference risk."
+    },
+    {
+      "id": "OP-010",
+      "question": "What is generally best before changing to another frequency with a contact?",
+      "options": [
+        { "key": "A", "text": "Move without saying anything" },
+        { "key": "B", "text": "Agree the new frequency clearly with the other station" },
+        { "key": "C", "text": "Turn squelch off first" },
+        { "key": "D", "text": "Switch to maximum power" }
+      ],
+      "correct": "B",
+      "reason": "Clear coordination avoids confusion and keeps operation efficient."
+    },
+    {
+      "id": "OP-011",
+      "question": "When passing message content on-air, what style is usually best?",
+      "options": [
+        { "key": "A", "text": "Fast and complex phrasing" },
+        { "key": "B", "text": "Clear, concise wording with key details repeated if needed" },
+        { "key": "C", "text": "Slang and abbreviations only" },
+        { "key": "D", "text": "Whispering into the microphone" }
+      ],
+      "correct": "B",
+      "reason": "Plain, concise communication improves accuracy, especially under weak-signal conditions."
+    },
+    {
+      "id": "OP-012",
+      "question": "What is appropriate if priority or emergency traffic appears on your frequency?",
+      "options": [
+        { "key": "A", "text": "Continue routine chat" },
+        { "key": "B", "text": "Stand by and keep the frequency clear" },
+        { "key": "C", "text": "Tune your antenna" },
+        { "key": "D", "text": "Request signal reports" }
+      ],
+      "correct": "B",
+      "reason": "Routine traffic should cease so priority communications can pass quickly and safely."
     }
   ]
 }

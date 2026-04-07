@@ -36,6 +36,114 @@
       ],
       "correct": "A",
       "reason": "Temperature inversions and ducting can allow VHF/UHF signals to travel much further than normal."
+    },
+    {
+      "id": "PR-004",
+      "question": "What part of the upper atmosphere is important for many long-distance HF contacts?",
+      "options": [
+        { "key": "A", "text": "The ionosphere" },
+        { "key": "B", "text": "The troposphere only at all times" },
+        { "key": "C", "text": "Groundwater" },
+        { "key": "D", "text": "The Earth's core" }
+      ],
+      "correct": "A",
+      "reason": "Many long-distance HF paths depend on signals being refracted by the ionosphere."
+    },
+    {
+      "id": "PR-005",
+      "question": "What usually happens to VHF/UHF signals when hills or buildings block the path?",
+      "options": [
+        { "key": "A", "text": "Coverage often becomes weaker" },
+        { "key": "B", "text": "Signals become perfectly clear" },
+        { "key": "C", "text": "Only antenna colour changes" },
+        { "key": "D", "text": "The frequency doubles" }
+      ],
+      "correct": "A",
+      "reason": "VHF/UHF signals are strongly affected by obstructions because they rely heavily on line-of-sight paths."
+    },
+    {
+      "id": "PR-006",
+      "question": "Why can HF band conditions vary at different times of day?",
+      "options": [
+        { "key": "A", "text": "Because microphone gain changes with time" },
+        { "key": "B", "text": "Because ionospheric conditions change" },
+        { "key": "C", "text": "Because feeder loss disappears at night" },
+        { "key": "D", "text": "Because antennas stop resonating at sunset" }
+      ],
+      "correct": "B",
+      "reason": "Daily changes in ionospheric ionization affect how well different HF bands propagate."
+    },
+    {
+      "id": "PR-007",
+      "question": "What is often the dominant propagation mode for local VHF simplex contacts?",
+      "options": [
+        { "key": "A", "text": "Line-of-sight" },
+        { "key": "B", "text": "Moonbounce" },
+        { "key": "C", "text": "Meteor scatter only" },
+        { "key": "D", "text": "Ground penetrating wave" }
+      ],
+      "correct": "A",
+      "reason": "Many local VHF paths depend mainly on line-of-sight conditions."
+    },
+    {
+      "id": "PR-008",
+      "question": "What does the term skip distance relate to in HF operation?",
+      "options": [
+        { "key": "A", "text": "Distance between radio and power supply" },
+        { "key": "B", "text": "Nearest point where skywave returns to Earth" },
+        { "key": "C", "text": "Length of feeder cable" },
+        { "key": "D", "text": "Distance between repeater channels" }
+      ],
+      "correct": "B",
+      "reason": "Skip distance is the closest point from the transmitter where refracted HF skywave is received."
+    },
+    {
+      "id": "PR-009",
+      "question": "Why can lower HF bands often perform better for medium/long distance at night?",
+      "options": [
+        { "key": "A", "text": "Night increases battery voltage" },
+        { "key": "B", "text": "Ionospheric changes can reduce absorption on lower HF" },
+        { "key": "C", "text": "Antenna gain doubles automatically" },
+        { "key": "D", "text": "FM deviation becomes smaller" }
+      ],
+      "correct": "B",
+      "reason": "Night-time ionospheric conditions often favor propagation on lower HF frequencies."
+    },
+    {
+      "id": "PR-010",
+      "question": "What might signal fading indicate during an HF contact?",
+      "options": [
+        { "key": "A", "text": "A normal propagation effect" },
+        { "key": "B", "text": "Guaranteed transmitter damage" },
+        { "key": "C", "text": "Incorrect callsign format" },
+        { "key": "D", "text": "The antenna is disconnected" }
+      ],
+      "correct": "A",
+      "reason": "Fading is commonly caused by changing propagation paths and conditions."
+    },
+    {
+      "id": "PR-011",
+      "question": "Which change most often improves VHF/UHF weak-signal path reliability?",
+      "options": [
+        { "key": "A", "text": "Lowering antenna height" },
+        { "key": "B", "text": "Improving antenna placement and clear takeoff" },
+        { "key": "C", "text": "Using less selective filters" },
+        { "key": "D", "text": "Removing feeder connectors" }
+      ],
+      "correct": "B",
+      "reason": "A clearer path and better antenna siting usually improve VHF/UHF performance."
+    },
+    {
+      "id": "PR-012",
+      "question": "What can cause unexpectedly long VHF contacts during high-pressure weather systems?",
+      "options": [
+        { "key": "A", "text": "Tropospheric enhancement" },
+        { "key": "B", "text": "Antenna detuning only" },
+        { "key": "C", "text": "Battery memory effect" },
+        { "key": "D", "text": "Incorrect CTCSS tone" }
+      ],
+      "correct": "A",
+      "reason": "Temperature inversions in high-pressure systems can support tropospheric ducting and extended range."
     }
   ]
 }

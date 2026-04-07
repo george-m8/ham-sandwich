@@ -36,6 +36,114 @@
       ],
       "correct": "B",
       "reason": "Higher antennas usually improve line-of-sight paths and coverage at VHF/UHF."
+    },
+    {
+      "id": "AF-004",
+      "question": "Which antenna polarization is commonly used for VHF/UHF FM mobile operation?",
+      "options": [
+        { "key": "A", "text": "Vertical" },
+        { "key": "B", "text": "Horizontal" },
+        { "key": "C", "text": "Circular only" },
+        { "key": "D", "text": "No polarization is used" }
+      ],
+      "correct": "A",
+      "reason": "Vertical polarization is commonly used for FM mobile and many VHF/UHF local stations."
+    },
+    {
+      "id": "AF-005",
+      "question": "What is one job of the outer braid or screen in coaxial cable?",
+      "options": [
+        { "key": "A", "text": "It stores microphone audio" },
+        { "key": "B", "text": "It acts as a shield and return conductor" },
+        { "key": "C", "text": "It tunes the transmitter automatically" },
+        { "key": "D", "text": "It replaces the antenna" }
+      ],
+      "correct": "B",
+      "reason": "The outer conductor of coax acts as a screen and forms part of the transmission path."
+    },
+    {
+      "id": "AF-006",
+      "question": "What is a likely result of a poorly matched antenna system?",
+      "options": [
+        { "key": "A", "text": "Higher SWR" },
+        { "key": "B", "text": "Lower feeder loss in all cases" },
+        { "key": "C", "text": "Guaranteed longer range" },
+        { "key": "D", "text": "Automatic licence upgrade" }
+      ],
+      "correct": "A",
+      "reason": "A mismatch between transmitter, feeder, and antenna commonly results in a higher SWR."
+    },
+    {
+      "id": "AF-007",
+      "question": "Why is weatherproofing outdoor coax connectors important?",
+      "options": [
+        { "key": "A", "text": "It changes the band plan" },
+        { "key": "B", "text": "It helps prevent water ingress and increased losses" },
+        { "key": "C", "text": "It increases microphone gain" },
+        { "key": "D", "text": "It removes the need for grounding" }
+      ],
+      "correct": "B",
+      "reason": "Moisture entering connectors can increase attenuation and degrade reliability."
+    },
+    {
+      "id": "AF-008",
+      "question": "What is the usual purpose of a directional antenna?",
+      "options": [
+        { "key": "A", "text": "Radiate equally in all directions" },
+        { "key": "B", "text": "Concentrate signal in preferred directions" },
+        { "key": "C", "text": "Eliminate feeder losses" },
+        { "key": "D", "text": "Convert FM into AM" }
+      ],
+      "correct": "B",
+      "reason": "Directional antennas provide gain by focusing radiation in specific directions."
+    },
+    {
+      "id": "AF-009",
+      "question": "How does feeder loss generally change as frequency increases for similar coax length/type?",
+      "options": [
+        { "key": "A", "text": "It usually increases" },
+        { "key": "B", "text": "It usually decreases to zero" },
+        { "key": "C", "text": "It becomes negative" },
+        { "key": "D", "text": "It is always unchanged" }
+      ],
+      "correct": "A",
+      "reason": "For most coax types, attenuation tends to be higher at higher frequencies."
+    },
+    {
+      "id": "AF-010",
+      "question": "What is a practical reason to use a dummy load during transmitter testing?",
+      "options": [
+        { "key": "A", "text": "To radiate further than normal" },
+        { "key": "B", "text": "To avoid radiating a signal over the air" },
+        { "key": "C", "text": "To tune repeaters" },
+        { "key": "D", "text": "To replace the power supply" }
+      ],
+      "correct": "B",
+      "reason": "A suitable dummy load allows testing while minimizing on-air transmissions."
+    },
+    {
+      "id": "AF-011",
+      "question": "What is one common use of a balun in antenna systems?",
+      "options": [
+        { "key": "A", "text": "To charge batteries" },
+        { "key": "B", "text": "To connect balanced and unbalanced systems" },
+        { "key": "C", "text": "To increase speech compression" },
+        { "key": "D", "text": "To decode digital modes" }
+      ],
+      "correct": "B",
+      "reason": "A balun is often used when interfacing balanced antennas with unbalanced feeder lines."
+    },
+    {
+      "id": "AF-012",
+      "question": "Why can poor-quality or damaged coax connectors cause station problems?",
+      "options": [
+        { "key": "A", "text": "They improve impedance matching" },
+        { "key": "B", "text": "They can introduce losses and intermittent faults" },
+        { "key": "C", "text": "They increase licence privileges" },
+        { "key": "D", "text": "They reduce receiver sensitivity to zero" }
+      ],
+      "correct": "B",
+      "reason": "Bad connectors can add loss, mismatch, and intermittent connection issues."
     }
   ]
 }

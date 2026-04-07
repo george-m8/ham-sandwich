@@ -36,6 +36,114 @@
       ],
       "correct": "C",
       "reason": "Without a proper load, reflected power can stress and damage transmitter output stages."
+    },
+    {
+      "id": "TR-004",
+      "question": "What does an S-meter on a receiver usually indicate?",
+      "options": [
+        { "key": "A", "text": "Battery charging speed" },
+        { "key": "B", "text": "Received signal strength" },
+        { "key": "C", "text": "Antenna height" },
+        { "key": "D", "text": "Microphone sensitivity" }
+      ],
+      "correct": "B",
+      "reason": "An S-meter is used to show the approximate strength of the received signal."
+    },
+    {
+      "id": "TR-005",
+      "question": "What is the purpose of a repeater offset or duplex shift?",
+      "options": [
+        { "key": "A", "text": "To separate transmit and receive frequencies" },
+        { "key": "B", "text": "To increase speaker volume" },
+        { "key": "C", "text": "To tune the antenna automatically" },
+        { "key": "D", "text": "To lower battery voltage" }
+      ],
+      "correct": "A",
+      "reason": "Repeaters receive on one frequency and retransmit on another, so radios use an offset between TX and RX."
+    },
+    {
+      "id": "TR-006",
+      "question": "Why is using a low power setting often a good choice on a handheld radio?",
+      "options": [
+        { "key": "A", "text": "It can save battery and reduce unnecessary interference" },
+        { "key": "B", "text": "It makes the antenna longer" },
+        { "key": "C", "text": "It changes FM to SSB" },
+        { "key": "D", "text": "It removes the need for a callsign" }
+      ],
+      "correct": "A",
+      "reason": "Low power can be sufficient for local contacts while conserving battery and limiting unnecessary RF output."
+    },
+    {
+      "id": "TR-007",
+      "question": "What is receiver selectivity?",
+      "options": [
+        { "key": "A", "text": "Ability to separate wanted and nearby unwanted signals" },
+        { "key": "B", "text": "Battery endurance at low temperature" },
+        { "key": "C", "text": "How fast the radio scans memory channels" },
+        { "key": "D", "text": "Output power into a dummy load" }
+      ],
+      "correct": "A",
+      "reason": "Selectivity describes how well a receiver rejects adjacent-channel interference."
+    },
+    {
+      "id": "TR-008",
+      "question": "What can happen if FM microphone gain is set too high?",
+      "options": [
+        { "key": "A", "text": "Under-deviation and weak modulation only" },
+        { "key": "B", "text": "Over-deviation and distorted audio" },
+        { "key": "C", "text": "The antenna becomes resonant" },
+        { "key": "D", "text": "The squelch opens permanently" }
+      ],
+      "correct": "B",
+      "reason": "Excessive audio drive can cause over-deviation and poorer signal quality."
+    },
+    {
+      "id": "TR-009",
+      "question": "What is the purpose of CTCSS or tone squelch on many FM systems?",
+      "options": [
+        { "key": "A", "text": "To encrypt transmissions" },
+        { "key": "B", "text": "To control when the receiver audio unmutes" },
+        { "key": "C", "text": "To increase RF output power" },
+        { "key": "D", "text": "To tune antenna impedance" }
+      ],
+      "correct": "B",
+      "reason": "Tone squelch is used to reduce nuisance audio by requiring a matching tone to open squelch."
+    },
+    {
+      "id": "TR-010",
+      "question": "What is a transceiver?",
+      "options": [
+        { "key": "A", "text": "A separate power supply and battery pack" },
+        { "key": "B", "text": "A combined transmitter and receiver in one unit" },
+        { "key": "C", "text": "A type of antenna mast" },
+        { "key": "D", "text": "A digital logging program" }
+      ],
+      "correct": "B",
+      "reason": "A transceiver integrates transmit and receive functions in one radio."
+    },
+    {
+      "id": "TR-011",
+      "question": "Why might an attenuator be switched in on a receiver?",
+      "options": [
+        { "key": "A", "text": "To help when very strong signals overload the front end" },
+        { "key": "B", "text": "To increase transmit duty cycle" },
+        { "key": "C", "text": "To add CTCSS tones" },
+        { "key": "D", "text": "To convert FM to AM" }
+      ],
+      "correct": "A",
+      "reason": "Attenuation can improve reception in very strong-signal environments by reducing overload."
+    },
+    {
+      "id": "TR-012",
+      "question": "If a handheld cannot key a repeater, what is a sensible first check?",
+      "options": [
+        { "key": "A", "text": "Whether frequency shift and access tone are set correctly" },
+        { "key": "B", "text": "Whether the speaker volume is maximum" },
+        { "key": "C", "text": "Whether the battery label is new" },
+        { "key": "D", "text": "Whether AM mode is selected" }
+      ],
+      "correct": "A",
+      "reason": "Incorrect repeater offset or access tone is a common reason for failed repeater access."
     }
   ]
 }

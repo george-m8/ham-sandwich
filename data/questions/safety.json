@@ -36,6 +36,114 @@
       ],
       "correct": "C",
       "reason": "Lightning risk makes operation unsafe; equipment should be disconnected and operation stopped."
+    },
+    {
+      "id": "SF-004",
+      "question": "Why should the power lead to radio equipment be fitted with the correct fuse?",
+      "options": [
+        { "key": "A", "text": "To make the audio louder" },
+        { "key": "B", "text": "To protect wiring and equipment against excess current" },
+        { "key": "C", "text": "To improve antenna gain" },
+        { "key": "D", "text": "To reduce operating frequency" }
+      ],
+      "correct": "B",
+      "reason": "A correctly rated fuse helps protect cables and equipment if a fault causes excessive current."
+    },
+    {
+      "id": "SF-005",
+      "question": "What is a safe approach when working on masts, roofs, or high antenna supports?",
+      "options": [
+        { "key": "A", "text": "Work alone as quickly as possible" },
+        { "key": "B", "text": "Use suitable safety equipment and avoid working alone" },
+        { "key": "C", "text": "Transmit while climbing" },
+        { "key": "D", "text": "Wait for windy conditions" }
+      ],
+      "correct": "B",
+      "reason": "Work at height requires proper precautions, suitable equipment, and ideally another person present."
+    },
+    {
+      "id": "SF-006",
+      "question": "What should you do with loose cables in the shack or operating area?",
+      "options": [
+        { "key": "A", "text": "Leave them across walkways" },
+        { "key": "B", "text": "Secure them to reduce trip and damage hazards" },
+        { "key": "C", "text": "Soak them in water" },
+        { "key": "D", "text": "Place them near heaters" }
+      ],
+      "correct": "B",
+      "reason": "Securing cables helps prevent trips, connector damage, and accidental disconnection."
+    },
+    {
+      "id": "SF-007",
+      "question": "What is a key reason to assess RF exposure around your antenna system?",
+      "options": [
+        { "key": "A", "text": "To meet licence EMF requirements" },
+        { "key": "B", "text": "To improve speech compression" },
+        { "key": "C", "text": "To reduce SWR to zero" },
+        { "key": "D", "text": "To increase battery capacity" }
+      ],
+      "correct": "A",
+      "reason": "EMF assessment helps ensure operation remains within required exposure limits."
+    },
+    {
+      "id": "SF-008",
+      "question": "Why should battery terminals be protected from accidental short circuits?",
+      "options": [
+        { "key": "A", "text": "To avoid dangerous high currents and heating" },
+        { "key": "B", "text": "To increase modulation depth" },
+        { "key": "C", "text": "To improve propagation" },
+        { "key": "D", "text": "To reduce callsign length" }
+      ],
+      "correct": "A",
+      "reason": "Shorting a battery can release very high current and cause burns, fire, or equipment damage."
+    },
+    {
+      "id": "SF-009",
+      "question": "What is the safest approach before opening radio equipment covers?",
+      "options": [
+        { "key": "A", "text": "Leave power connected" },
+        { "key": "B", "text": "Disconnect from mains/supply and allow capacitors to discharge" },
+        { "key": "C", "text": "Increase transmit power" },
+        { "key": "D", "text": "Hold the PTT down" }
+      ],
+      "correct": "B",
+      "reason": "Isolating power and allowing stored charge to dissipate reduces electric shock risk."
+    },
+    {
+      "id": "SF-010",
+      "question": "Why is adequate ventilation around power supplies and transmitters important?",
+      "options": [
+        { "key": "A", "text": "It prevents overheating and reduces fire risk" },
+        { "key": "B", "text": "It increases frequency stability by law" },
+        { "key": "C", "text": "It changes DC to AC" },
+        { "key": "D", "text": "It removes need for fuses" }
+      ],
+      "correct": "A",
+      "reason": "Good airflow helps prevent excessive temperatures and associated hazards."
+    },
+    {
+      "id": "SF-011",
+      "question": "What should be done if RF burns or shock hazards are suspected at a station?",
+      "options": [
+        { "key": "A", "text": "Continue normal operation" },
+        { "key": "B", "text": "Stop, investigate, and fix the cause before further use" },
+        { "key": "C", "text": "Increase output power" },
+        { "key": "D", "text": "Disable station fuses" }
+      ],
+      "correct": "B",
+      "reason": "Hazards should be addressed before operation resumes to protect people and equipment."
+    },
+    {
+      "id": "SF-012",
+      "question": "What is good safety practice when routing external feeder cables into a building?",
+      "options": [
+        { "key": "A", "text": "Leave gaps and strain on connectors" },
+        { "key": "B", "text": "Provide strain relief and suitable entry protection" },
+        { "key": "C", "text": "Run them through hot appliance vents" },
+        { "key": "D", "text": "Coil tightly around mains wiring" }
+      ],
+      "correct": "B",
+      "reason": "Proper entry and strain relief reduce mechanical damage and water ingress risks."
     }
   ]
 }

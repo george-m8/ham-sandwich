@@ -36,6 +36,114 @@
       ],
       "correct": "B",
       "reason": "From Ohm’s law, I = V/R, so current decreases as resistance increases for constant voltage."
+    },
+    {
+      "id": "TB-004",
+      "question": "What unit is used to measure electrical power?",
+      "options": [
+        { "key": "A", "text": "Watt" },
+        { "key": "B", "text": "Ohm" },
+        { "key": "C", "text": "Henry" },
+        { "key": "D", "text": "Hertz" }
+      ],
+      "correct": "A",
+      "reason": "Electrical power is measured in watts (W)."
+    },
+    {
+      "id": "TB-005",
+      "question": "What type of current does a typical battery supply?",
+      "options": [
+        { "key": "A", "text": "Alternating current" },
+        { "key": "B", "text": "Direct current" },
+        { "key": "C", "text": "Radio frequency current only" },
+        { "key": "D", "text": "Three-phase current" }
+      ],
+      "correct": "B",
+      "reason": "A battery provides direct current (DC)."
+    },
+    {
+      "id": "TB-006",
+      "question": "If two 1.5 volt cells are connected in series, what is the total voltage?",
+      "options": [
+        { "key": "A", "text": "0.75 V" },
+        { "key": "B", "text": "1.5 V" },
+        { "key": "C", "text": "3.0 V" },
+        { "key": "D", "text": "6.0 V" }
+      ],
+      "correct": "C",
+      "reason": "Voltages add in series, so two 1.5 V cells provide 3.0 V in total."
+    },
+    {
+      "id": "TB-007",
+      "question": "What quantity is measured in amperes (amps)?",
+      "options": [
+        { "key": "A", "text": "Voltage" },
+        { "key": "B", "text": "Current" },
+        { "key": "C", "text": "Resistance" },
+        { "key": "D", "text": "Power factor" }
+      ],
+      "correct": "B",
+      "reason": "Electrical current is measured in amperes."
+    },
+    {
+      "id": "TB-008",
+      "question": "What does a resistor do in a circuit?",
+      "options": [
+        { "key": "A", "text": "Opposes current flow" },
+        { "key": "B", "text": "Stores magnetic field energy only" },
+        { "key": "C", "text": "Generates RF power" },
+        { "key": "D", "text": "Converts AC to DC by itself" }
+      ],
+      "correct": "A",
+      "reason": "A resistor limits current and creates a voltage drop according to Ohm’s law."
+    },
+    {
+      "id": "TB-009",
+      "question": "In a simple series circuit, what happens to total resistance when another resistor is added in series?",
+      "options": [
+        { "key": "A", "text": "It decreases" },
+        { "key": "B", "text": "It stays exactly the same" },
+        { "key": "C", "text": "It increases" },
+        { "key": "D", "text": "It becomes zero" }
+      ],
+      "correct": "C",
+      "reason": "Series resistances add together, increasing total resistance."
+    },
+    {
+      "id": "TB-010",
+      "question": "What is the relationship between frequency and wavelength?",
+      "options": [
+        { "key": "A", "text": "Higher frequency means longer wavelength" },
+        { "key": "B", "text": "Higher frequency means shorter wavelength" },
+        { "key": "C", "text": "They are unrelated" },
+        { "key": "D", "text": "Both are always constant" }
+      ],
+      "correct": "B",
+      "reason": "As frequency increases, wavelength decreases for radio waves in the same medium."
+    },
+    {
+      "id": "TB-011",
+      "question": "What is one main function of a diode?",
+      "options": [
+        { "key": "A", "text": "Allow current mainly in one direction" },
+        { "key": "B", "text": "Store electrical charge like a capacitor" },
+        { "key": "C", "text": "Provide variable resistance like a potentiometer" },
+        { "key": "D", "text": "Amplify RF power by itself" }
+      ],
+      "correct": "A",
+      "reason": "A diode is a semiconductor device that primarily conducts in one direction."
+    },
+    {
+      "id": "TB-012",
+      "question": "If power is calculated by P = V × I, what is power when V = 12 and I = 2?",
+      "options": [
+        { "key": "A", "text": "6 W" },
+        { "key": "B", "text": "12 W" },
+        { "key": "C", "text": "24 W" },
+        { "key": "D", "text": "48 W" }
+      ],
+      "correct": "C",
+      "reason": "Power equals voltage times current, so 12 × 2 = 24 watts."
     }
   ]
 }

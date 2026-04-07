@@ -36,6 +36,114 @@
       ],
       "correct": "C",
       "reason": "A callsign uniquely identifies the licensed station/operator using the transmission."
+    },
+    {
+      "id": "LR-004",
+      "question": "Why must an amateur radio operator stay within the licence terms?",
+      "options": [
+        { "key": "A", "text": "To make the radio lighter" },
+        { "key": "B", "text": "Because the licence sets the legal conditions of operation" },
+        { "key": "C", "text": "To improve microphone audio" },
+        { "key": "D", "text": "Because it increases antenna gain" }
+      ],
+      "correct": "B",
+      "reason": "The licence defines the legal conditions under which the amateur station may be used."
+    },
+    {
+      "id": "LR-005",
+      "question": "If your licence contact details change, what should you do?",
+      "options": [
+        { "key": "A", "text": "Nothing until renewal" },
+        { "key": "B", "text": "Update the licensing records as required" },
+        { "key": "C", "text": "Buy a new antenna first" },
+        { "key": "D", "text": "Change band immediately" }
+      ],
+      "correct": "B",
+      "reason": "Licence records should be kept up to date in line with the regulator's requirements."
+    },
+    {
+      "id": "LR-006",
+      "question": "What should guide your choice of frequencies and power levels when transmitting?",
+      "options": [
+        { "key": "A", "text": "Personal preference only" },
+        { "key": "B", "text": "The limits and permissions of your licence" },
+        { "key": "C", "text": "The colour of the radio" },
+        { "key": "D", "text": "The age of the microphone" }
+      ],
+      "correct": "B",
+      "reason": "Your licence determines the frequencies, modes, and power levels you are allowed to use."
+    },
+    {
+      "id": "LR-007",
+      "question": "Under normal circumstances, which type of messages are not permitted in amateur transmissions?",
+      "options": [
+        { "key": "A", "text": "Messages in secret code" },
+        { "key": "B", "text": "Technical discussions" },
+        { "key": "C", "text": "Signal reports" },
+        { "key": "D", "text": "Short CQ calls" }
+      ],
+      "correct": "A",
+      "reason": "Amateur transmissions should not use secret codes except where specific licence provisions apply."
+    },
+    {
+      "id": "LR-008",
+      "question": "What must an operator ensure about station use by unlicensed people?",
+      "options": [
+        { "key": "A", "text": "They may transmit freely when unsupervised" },
+        { "key": "B", "text": "Use must comply with licence permissions and supervision rules" },
+        { "key": "C", "text": "They can use any callsign" },
+        { "key": "D", "text": "No identification is needed" }
+      ],
+      "correct": "B",
+      "reason": "Station operation by others must follow licence terms, including control and supervision requirements."
+    },
+    {
+      "id": "LR-009",
+      "question": "When operating, why is transmitting your station callsign important?",
+      "options": [
+        { "key": "A", "text": "It identifies the licensed station/operator" },
+        { "key": "B", "text": "It boosts ERP" },
+        { "key": "C", "text": "It suppresses harmonics" },
+        { "key": "D", "text": "It improves battery life" }
+      ],
+      "correct": "A",
+      "reason": "Identification links transmissions to the licensed station as required by regulation."
+    },
+    {
+      "id": "LR-010",
+      "question": "If a licence condition conflicts with personal preference, what applies?",
+      "options": [
+        { "key": "A", "text": "Personal preference" },
+        { "key": "B", "text": "Licence conditions" },
+        { "key": "C", "text": "Nearest station’s opinion" },
+        { "key": "D", "text": "Social media advice" }
+      ],
+      "correct": "B",
+      "reason": "Licence conditions are legally binding and must be followed."
+    },
+    {
+      "id": "LR-011",
+      "question": "What does a UK Regional Secondary Locator in a callsign indicate?",
+      "options": [
+        { "key": "A", "text": "A mode of transmission" },
+        { "key": "B", "text": "A region/country designator within the UK context" },
+        { "key": "C", "text": "Antenna polarization" },
+        { "key": "D", "text": "Station power class" }
+      ],
+      "correct": "B",
+      "reason": "Regional secondary locators are used as geographic designators in UK callsign formats."
+    },
+    {
+      "id": "LR-012",
+      "question": "If required by your licence, why should logs be accurate and timely?",
+      "options": [
+        { "key": "A", "text": "For regulatory compliance and traceability" },
+        { "key": "B", "text": "To increase transmit power" },
+        { "key": "C", "text": "To tune the antenna" },
+        { "key": "D", "text": "To avoid using a callsign" }
+      ],
+      "correct": "A",
+      "reason": "Accurate records support compliance and can assist with investigation of issues."
     }
   ]
 }

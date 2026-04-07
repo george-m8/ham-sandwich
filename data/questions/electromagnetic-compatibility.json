@@ -34,8 +34,116 @@
         { "key": "C", "text": "Using only battery power" },
         { "key": "D", "text": "Turning squelch off" }
       ],
-       "correct": "A",
-       "reason": "Ferrite chokes can suppress common-mode RF currents on leads and help mitigate EMC issues."
-     }
-   ]
- }
+      "correct": "A",
+      "reason": "Ferrite chokes can suppress common-mode RF currents on leads and help mitigate EMC issues."
+    },
+    {
+      "id": "EC-004",
+      "question": "What can happen if a transmitter is overdriven?",
+      "options": [
+        { "key": "A", "text": "It produces cleaner signals" },
+        { "key": "B", "text": "It can create unwanted emissions and interference" },
+        { "key": "C", "text": "It lowers SWR automatically" },
+        { "key": "D", "text": "It improves receiver selectivity" }
+      ],
+      "correct": "B",
+      "reason": "Overdriving can distort the signal and generate unwanted emissions that affect other users."
+    },
+    {
+      "id": "EC-005",
+      "question": "Why is tidy station cabling and equipment layout helpful for EMC?",
+      "options": [
+        { "key": "A", "text": "It always increases output power" },
+        { "key": "B", "text": "It can reduce unwanted coupling between cables and equipment" },
+        { "key": "C", "text": "It removes the need for a licence" },
+        { "key": "D", "text": "It guarantees worldwide coverage" }
+      ],
+      "correct": "B",
+      "reason": "Good cable routing and layout can reduce unintended RF pickup and interference paths."
+    },
+    {
+      "id": "EC-006",
+      "question": "If interference affects nearby audio or TV equipment only when you transmit, what is a sensible conclusion?",
+      "options": [
+        { "key": "A", "text": "The radio waves must be illegal" },
+        { "key": "B", "text": "An EMC issue should be investigated" },
+        { "key": "C", "text": "Your receiver volume is too low" },
+        { "key": "D", "text": "The antenna is too short to radiate" }
+      ],
+      "correct": "B",
+      "reason": "Interference linked to transmitting suggests an EMC problem that should be investigated and reduced."
+    },
+    {
+      "id": "EC-007",
+      "question": "What is often a good first step when investigating reported interference from your station?",
+      "options": [
+        { "key": "A", "text": "Increase transmit power" },
+        { "key": "B", "text": "Confirm whether the issue occurs only while you transmit" },
+        { "key": "C", "text": "Change your callsign" },
+        { "key": "D", "text": "Replace all antennas immediately" }
+      ],
+      "correct": "B",
+      "reason": "Verifying when the interference occurs helps identify whether your transmissions are involved."
+    },
+    {
+      "id": "EC-008",
+      "question": "How can reducing transmit power help with EMC problems?",
+      "options": [
+        { "key": "A", "text": "It can reduce unwanted coupling into nearby equipment" },
+        { "key": "B", "text": "It removes all harmonics permanently" },
+        { "key": "C", "text": "It changes modulation automatically" },
+        { "key": "D", "text": "It disables common-mode currents" }
+      ],
+      "correct": "A",
+      "reason": "Lower RF power can reduce the strength of unintended RF pickup paths."
+    },
+    {
+      "id": "EC-009",
+      "question": "What is a likely EMC benefit of keeping feeder cables away from domestic audio leads?",
+      "options": [
+        { "key": "A", "text": "Lower chance of RF pickup in audio equipment" },
+        { "key": "B", "text": "Guaranteed higher transmitter output" },
+        { "key": "C", "text": "Automatic licence renewal" },
+        { "key": "D", "text": "SWR always becomes 1:1" }
+      ],
+      "correct": "A",
+      "reason": "Physical separation can reduce coupling between RF and susceptible domestic cabling."
+    },
+    {
+      "id": "EC-010",
+      "question": "Why should transmitters be operated within their specified audio/input levels?",
+      "options": [
+        { "key": "A", "text": "To reduce the risk of splatter and unwanted emissions" },
+        { "key": "B", "text": "To increase feeder length" },
+        { "key": "C", "text": "To bypass licence conditions" },
+        { "key": "D", "text": "To avoid using an antenna" }
+      ],
+      "correct": "A",
+      "reason": "Overdriving can broaden the transmitted spectrum and cause adjacent-channel interference."
+    },
+    {
+      "id": "EC-011",
+      "question": "Which statement about EMC responsibility best reflects good amateur practice?",
+      "options": [
+        { "key": "A", "text": "Interference is always someone else’s problem" },
+        { "key": "B", "text": "The station operator should investigate and mitigate issues" },
+        { "key": "C", "text": "Only equipment manufacturers can act" },
+        { "key": "D", "text": "Problems can be ignored on weekends" }
+      ],
+      "correct": "B",
+      "reason": "Responsible operation includes helping identify and reduce interference from your station."
+    },
+    {
+      "id": "EC-012",
+      "question": "What can ferrite chokes on power and signal leads help to suppress?",
+      "options": [
+        { "key": "A", "text": "Common-mode RF currents" },
+        { "key": "B", "text": "DC supply voltage" },
+        { "key": "C", "text": "Antenna polarization" },
+        { "key": "D", "text": "Skywave propagation" }
+      ],
+      "correct": "A",
+      "reason": "Ferrites impede unwanted RF currents on cables, reducing EMC issues."
+    }
+  ]
+}
