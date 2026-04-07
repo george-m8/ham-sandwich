@@ -1,0 +1,61 @@
+Tip: Generate workspace instructions so Copilot always has the context it needs when starting a task.
+
+create a series of docs as created in the LLM directory. you need to fill out each of those docs.
+
+I need a plan of how we are planning to build a website with the following main parts:
+
+A site where all this can be disovered and used
+CHIRP CSV, an LLM based tool for generating interesting CHIRP frequency lists to import and upload to radios.
+Tests, where users can answer questions from a mock Amateur Radio Foundation Licence (UK) and be told if they're correct and get correct answer and explaintation if wrong
+Here's some more detail on each:
+
+Overview
+A high level overview detailing each part of the plan.
+Site:
+This will be hosted using cloudflare pages/workers
+should use a the receipt-css css library for style
+will include CHIRP CSS and tests
+Will feature a homepage talking about what you can do and showing links
+Will feature buy me a coffee, etc links and should have a nice way of adding to and updating these links, logo, text, URL
+Useful links page
+Nice nav bar
+Area for recommended radio directory
+Picture, description, etc, affiliate link
+Login using firebase to save LLM api keys, generated CSVs, test results, etc
+Directory of generated CSV from CHIRP CSV with ability to filter by useful filters and search by keywords
+LLM Powered CHIRP CSV generator
+Use pydantic AI to offer range of providers
+User enters their API key
+Plan to offer OpenAI, Gemini, Claude, Grok
+User selects LLM to use
+User enters a number of options, specific frequency ranges to consider, FM/AM, etc, DMR, repeaters Y/N, etc.
+user enters a description of what their interested in (prompt), defaults to "Intersting radio frequencies local to {my-location}". Use cloudflare location header if available, otherwise use backup of like IP range or something
+Once all filled out we send a request to the LLM of choice
+Request is formatted sensibly including users selected requirements and prompts
+Response should be formatted in something easy to work with like json
+Optionally, the response can be checked for validity in it's json and that the generated data returned fits to users requests and our understanding of what chirp allows
+User will have checked options for how much validation they want
+LLM will have specific incorrect items returned and asked to respond by removing them, or updating them
+Responses deduplicated by multiple fields, Name and Freq must both be duplicates to trigger deduplication
+Create CSV and offer download
+Save to server to be listed in a directory of generated CSVs
+Test
+nice test system
+create test items with json, question, multiple choice, correct, reason (always reason for correct, optionally reason for each incorrect)
+user takes test with x amount of questions
+user gets answers as they complete each question
+wrong answers are saved for retesting
+Optional retest incorrect at end of test when score is shown
+if logged in, we save their incorrect questions and they can take them all in one batch if they want.
+Plan to add categories to all questions so we can say which elements they need to revise on
+Plan to add a system of remembering how many times logged in user has got questions wrong and show a dynamic retest quiz where questions are shown more often if wrong often and less often if answered correctly every time
+Plan to add mock test where user is timed and gets answers at end of test
+Firebase
+provide firebase setup plan and how it will work with rest, as well as steps required from human to set up
+Cloudflare
+provide Cloudflare setup plan and how it will work with rest, as well as steps required from human to set up
+Docker
+I hope I can set iup with docker for local testing and also to run on cloudflare and stuff. If not possible or recommended then let me know. But would be nice to run local and on server
+General
+When writing these docs, if something depends on another documents content, then you should reference the other doc.
+This site should be created secure, slick, and smooth
