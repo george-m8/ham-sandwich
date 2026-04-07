@@ -144,8 +144,50 @@
           <textarea id="prompt" name="prompt" rows="5">Interesting radio frequencies local to {location}</textarea>
         </div>
 
+        <section class="output-box text-left">
+          <h3>List Workspace Tools</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="auto-assign-nfm">Auto-assign NFM where appropriate</label>
+              <label><input type="checkbox" id="auto-assign-nfm" checked> Enable NFM assignment (for example PMR446)</label>
+            </div>
+            <div class="form-group">
+              <label for="duplicate-policy">Merge Duplicate Policy</label>
+              <select id="duplicate-policy" name="duplicate-policy">
+                <option value="keep_first" selected>Keep first</option>
+                <option value="keep_latest">Keep latest</option>
+                <option value="keep_both">Keep both (suffix names)</option>
+                <option value="merge_metadata">Merge metadata</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="merge-source-id">Merge Source List ID</label>
+              <input type="text" id="merge-source-id" name="merge-source-id" placeholder="Optional list id from directory">
+            </div>
+            <div class="form-group">
+              <label for="rename-max-length">Rename max station length</label>
+              <input type="number" id="rename-max-length" name="rename-max-length" min="4" max="16" value="10">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="rename-style-prompt">Rename style prompt</label>
+            <input type="text" id="rename-style-prompt" name="rename-style-prompt" value="Descriptive station names in all caps">
+          </div>
+
+          <div class="horizontal-flex gap-sm action-row-center">
+            <button class="btn-secondary" id="save-draft-btn" type="button">Save Draft</button>
+            <button class="btn-secondary" id="merge-list-btn" type="button">Merge List</button>
+            <button class="btn-secondary" id="rename-list-btn" type="button">Rename Stations</button>
+            <button class="btn-box btn-sm" id="finalise-list-btn" type="button">Finalise List</button>
+          </div>
+        </section>
+
         <div class="horizontal-flex gap-sm action-row-center">
-          <button class="btn-box btn-sm" id="generate-btn" type="submit">Generate CSV</button>
+          <button class="btn-box btn-sm" id="generate-btn" type="submit">Generate Candidate List</button>
           <a class="btn-secondary" href="/chirp-csv/directory/">Open Directory →</a>
         </div>
       </form>

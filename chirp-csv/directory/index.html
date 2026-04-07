@@ -29,10 +29,25 @@
       <h2>CHIRP CSV Directory</h2>
       <div class="form-row">
         <div class="form-group">
+          <label for="entity-filter">Entity Type</label>
+          <select id="entity-filter">
+            <option value="lists" selected>Lists</option>
+            <option value="frequencies">Frequencies</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="region-filter">Region</label>
+          <input type="text" id="region-filter" placeholder="Country, region, city">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
           <label for="mode-filter">Mode</label>
           <select id="mode-filter">
             <option value="all">All</option>
             <option value="FM">FM</option>
+            <option value="NFM">NFM</option>
             <option value="AM">AM</option>
             <option value="DV">DMR / DV</option>
             <option value="USB">SSB / USB</option>
@@ -61,11 +76,23 @@
           </select>
         </div>
         <div class="form-group">
+          <label for="frequency-filter">Frequency (MHz)</label>
+          <input type="text" id="frequency-filter" placeholder="Exact (e.g. 145.500)">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="service-tag-filter">Service Tag</label>
+          <input type="text" id="service-tag-filter" placeholder="marine, pmr446, repeater...">
+        </div>
+        <div class="form-group">
           <label for="sort-filter">Sort By</label>
           <select id="sort-filter">
             <option value="newest">Newest</option>
             <option value="downloads">Most Downloaded</option>
             <option value="channels">Most Channels</option>
+            <option value="frequency">Frequency (Low → High)</option>
           </select>
         </div>
       </div>

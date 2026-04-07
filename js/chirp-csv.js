@@ -1,7 +1,10 @@
 (function () {
   const STORAGE_KEYS = {
     latest: 'ham_latest_csv_generation',
-    localDirectory: 'ham_csv_directory_local'
+    localDirectory: 'ham_csv_directory_local',
+    localDrafts: 'ham_csv_list_drafts_local',
+    localFrequencies: 'ham_frequency_directory_local',
+    workspace: 'ham_chirp_workspace'
   };
 
   const CHIRP_HEADERS = [
@@ -28,6 +31,10 @@
   const previewWrap = document.getElementById('preview-table-wrap');
   const generateButton = document.getElementById('generate-btn');
   const downloadButton = document.getElementById('download-btn');
+  const saveDraftButton = document.getElementById('save-draft-btn');
+  const mergeListButton = document.getElementById('merge-list-btn');
+  const renameListButton = document.getElementById('rename-list-btn');
+  const finaliseListButton = document.getElementById('finalise-list-btn');
 
   const providerInput = document.getElementById('provider');
   const modelInput = document.getElementById('model');
@@ -36,6 +43,11 @@
   const webSearchDescription = document.getElementById('web-search-description');
   const locationInput = document.getElementById('location');
   const promptInput = document.getElementById('prompt');
+  const autoAssignNfmInput = document.getElementById('auto-assign-nfm');
+  const duplicatePolicyInput = document.getElementById('duplicate-policy');
+  const mergeSourceIdInput = document.getElementById('merge-source-id');
+  const renameMaxLengthInput = document.getElementById('rename-max-length');
+  const renameStylePromptInput = document.getElementById('rename-style-prompt');
   const refreshModelsButton = document.getElementById('refresh-models-btn');
   const validationInput = document.getElementById('validation-level');
   const validationDescription = document.getElementById('validation-description');
@@ -53,6 +65,7 @@
   let templateIndex = 0;
   let latestCsvContent = '';
   let latestMeta = null;
+  let currentWorkspace = null;
   let modelDiscoveryInFlight = false;
 
   function normalizeModelOption(modelOption) {
@@ -367,6 +380,114 @@ Return JSON only:
       .slice(0, 24);
   }
 
+  function generateEntityId(prefix) {
+    return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+  }
+
+  function assignListItemIds(channels) {
+    return (Array.isArray(channels) ? channels : []).map((channel) => ({
+      ...channel,
+      list_item_id: String(channel?.list_item_id || generateEntityId('item'))
+    }));
+  }
+
+  function maybeAssignNfm(channel, enabled) {
+    if (!enabled) return channel;
+    const frequency = Number(channel.frequency);
+    const mode = String(channel.mode || '').toUpperCase();
+    const isPmr446 = Number.isFinite(frequency) && frequency >= 446.0 && frequency <= 446.2;
+    if (isPmr446 && (mode === 'FM' || !mode)) {
+      return { ...channel, mode: 'NFM' };
+    }
+    return channel;
+  }
+
+  function normalizeNameForLength(name, maxLength) {
+    const limit = Math.max(4, Math.min(16, Number(maxLength) || 10));
+    return String(name || '')
+      .trim()
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, '')
+      .slice(0, limit);
+  }
+
+  function mergeComment(baseComment, incomingComment) {
+    const first = String(baseComment || '').trim();
+    const second = String(incomingComment || '').trim();
+    if (!first) return second;
+    if (!second || second === first) return first;
+    return `${first} | ${second}`.slice(0, 200);
+  }
+
+  function channelMergeKey(channel) {
+    return `${Number(channel.frequency).toFixed(4)}::${String(channel.mode || '').toUpperCase()}`;
+  }
+
+  function mergeChannelLists(baseChannels, incomingChannels, strategy, maxNameLength) {
+    const merged = assignListItemIds([...(baseChannels || [])]).map((item) => ({ ...item }));
+    const incoming = assignListItemIds([...(incomingChannels || [])]);
+    const chosenStrategy = String(strategy || 'keep_first');
+
+    incoming.forEach((candidate) => {
+      const key = channelMergeKey(candidate);
+      const existingIndex = merged.findIndex((item) => channelMergeKey(item) === key);
+
+      if (existingIndex === -1) {
+        merged.push(candidate);
+        return;
+      }
+
+      if (chosenStrategy === 'keep_latest') {
+        merged[existingIndex] = { ...candidate };
+        return;
+      }
+
+      if (chosenStrategy === 'keep_both') {
+        const existingNames = new Set(merged.map((item) => String(item.name || '').toUpperCase()));
+        let nextName = normalizeNameForLength(candidate.name, maxNameLength) || `CH${Math.round(candidate.frequency * 1000)}`;
+        let suffix = 2;
+        while (existingNames.has(nextName)) {
+          const suffixText = String(suffix);
+          const base = nextName.slice(0, Math.max(1, nextName.length - suffixText.length));
+          nextName = `${base}${suffixText}`.slice(0, Math.max(4, Math.min(16, Number(maxNameLength) || 10)));
+          suffix += 1;
+        }
+        merged.push({ ...candidate, name: nextName });
+        return;
+      }
+
+      if (chosenStrategy === 'merge_metadata') {
+        const existing = merged[existingIndex];
+        merged[existingIndex] = {
+          ...existing,
+          comment: mergeComment(existing.comment, candidate.comment),
+          location_context: {
+            ...(existing.location_context || {}),
+            ...(candidate.location_context || {})
+          }
+        };
+      }
+    });
+
+    return merged;
+  }
+
+  function saveWorkspaceToSession(workspace) {
+    try {
+      window.sessionStorage.setItem(STORAGE_KEYS.workspace, JSON.stringify(workspace));
+    } catch (_error) {}
+  }
+
+  function restoreWorkspaceFromSession() {
+    try {
+      const raw = window.sessionStorage.getItem(STORAGE_KEYS.workspace);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (_error) {
+      return null;
+    }
+  }
+
   function renderPreview(channels, listDescription, keywords) {
     if (!channels.length) {
       previewWrap.textContent = 'No preview available.';
@@ -417,8 +538,9 @@ Return JSON only:
   }
 
   function normalizeChannel(raw, requestedModes, formOptions, report) {
+    const maxNameLength = Math.max(4, Math.min(16, Number(formOptions.renameMaxLength) || 10));
     const channel = {
-      name: String(raw?.name || '').trim().toUpperCase().slice(0, 8),
+      name: String(raw?.name || '').trim().toUpperCase().slice(0, maxNameLength),
       frequency: Number(raw?.frequency),
       duplex: ['', '+', '-', 'split'].includes(String(raw?.duplex || '').trim()) ? String(raw?.duplex || '').trim() : '',
       offset: Number.isFinite(Number(raw?.offset)) ? Math.max(0, Number(raw?.offset)) : 0,
@@ -443,7 +565,7 @@ Return JSON only:
         report.invalid.push({ name: channel.name || '(unnamed)', issues: ['frequency missing'] });
         return null;
       }
-      if (!channel.name) channel.name = `CH${Math.round(channel.frequency * 1000)}`.slice(0, 8);
+      if (!channel.name) channel.name = `CH${Math.round(channel.frequency * 1000)}`.slice(0, maxNameLength);
       return channel;
     }
 
@@ -468,7 +590,8 @@ Return JSON only:
     });
   }
 
-  function readFormOptions() {
+  function readFormOptions(options = {}) {
+    const requireApiKey = options.requireApiKey !== false;
     const provider = String(providerInput?.value || 'openai').trim().toLowerCase();
     const model = String(modelInput?.value || '').trim();
     const apiKey = String(apiKeyInput?.value || '').trim();
@@ -483,11 +606,16 @@ Return JSON only:
     const location = String(locationInput?.value || '').trim();
     const validationLevel = String(validationInput?.value || 'standard');
     const userPrompt = String(promptInput?.value || '').trim();
+    const autoAssignNfm = Boolean(autoAssignNfmInput?.checked);
+    const duplicatePolicy = String(duplicatePolicyInput?.value || 'keep_first');
+    const mergeSourceId = String(mergeSourceIdInput?.value || '').trim();
+    const renameMaxLength = Math.max(4, Math.min(16, Number(renameMaxLengthInput?.value) || 10));
+    const renameStylePrompt = String(renameStylePromptInput?.value || '').trim();
     const selectedModelConfig = getSelectedModelConfig();
     const webSearchAvailable = selectedModelConfig?.web_search_available !== false;
     const webSearch = Boolean(webSearchInput?.checked) && webSearchAvailable;
 
-    if (!apiKey) throw new Error('Enter your API key before generating.');
+    if (requireApiKey && !apiKey) throw new Error('Enter your API key before generating.');
     if (!location) throw new Error('Location is required.');
     if (freqMin !== null && freqMax !== null && freqMin >= freqMax) throw new Error('Min frequency must be lower than max frequency.');
     if (!selectedModes.length) throw new Error('Select at least one mode.');
@@ -506,7 +634,12 @@ Return JSON only:
       location,
       validationLevel,
       userPrompt,
-      webSearch
+      webSearch,
+      autoAssignNfm,
+      duplicatePolicy,
+      mergeSourceId,
+      renameMaxLength,
+      renameStylePrompt
     };
   }
 
@@ -546,16 +679,33 @@ Return JSON only:
     } catch (_error) {}
   }
 
-  async function persistGeneration(csvContent, channels, formOptions, metadata) {
-    const csvId = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+  function addLocalDraftEntry(entry) {
+    try {
+      const existing = JSON.parse(window.localStorage.getItem(STORAGE_KEYS.localDrafts) || '[]');
+      const withoutCurrent = existing.filter((item) => item.id !== entry.id);
+      withoutCurrent.unshift(entry);
+      window.localStorage.setItem(STORAGE_KEYS.localDrafts, JSON.stringify(withoutCurrent.slice(0, 250)));
+    } catch (_error) {}
+  }
+
+  function addLocalFrequencyEntries(entries) {
+    try {
+      const existing = JSON.parse(window.localStorage.getItem(STORAGE_KEYS.localFrequencies) || '[]');
+      const next = [...(Array.isArray(entries) ? entries : []), ...existing];
+      window.localStorage.setItem(STORAGE_KEYS.localFrequencies, JSON.stringify(next.slice(0, 3000)));
+    } catch (_error) {}
+  }
+
+  async function persistDraft(channels, formOptions, metadata) {
+    const draftId = generateEntityId('draft');
     const createdAt = new Date().toISOString();
     const tags = normalizeKeywords(metadata.keywords, formOptions);
 
     const entry = {
-      id: csvId,
+      id: draftId,
       title: String(metadata.title || `${formOptions.location} list`).slice(0, 120),
       description: String(metadata.listDescription || formOptions.userPrompt || ''),
-      csv_storage_path: `csvs/${csvId}.csv`,
+      status: 'draft',
       metadata: {
         num_channels: channels.length,
         freq_min: formOptions.freqMin,
@@ -573,17 +723,94 @@ Return JSON only:
       created_by: null,
       download_count: 0,
       tags,
-      preview_channels: channels.slice(0, 40)
+      preview_channels: channels.slice(0, 40),
+      channels
     };
+
+    const firebase = await getFirebaseState();
+    const user = firebase.available && firebase.auth ? firebase.auth.currentUser : null;
+    if (!firebase.available || !user?.uid) {
+      addLocalDraftEntry({ ...entry, source: 'local' });
+      return { saved: false };
+    }
+
+    entry.created_by = user.uid;
+
+    await firebase.db.collection('users').doc(entry.created_by || 'anonymous').collection('csv_drafts').doc(draftId).set(entry);
+
+    addLocalDraftEntry({ ...entry, source: 'firebase' });
+    return { saved: true, id: draftId };
+  }
+
+  async function persistFinalizedList(csvContent, channels, formOptions, metadata) {
+    const csvId = generateEntityId('list');
+    const createdAt = new Date().toISOString();
+    const tags = normalizeKeywords(metadata.keywords, formOptions);
+
+    const entry = {
+      id: csvId,
+      title: String(metadata.title || `${formOptions.location} list`).slice(0, 120),
+      description: String(metadata.listDescription || formOptions.userPrompt || ''),
+      status: 'finalised',
+      csv_storage_path: `csvs/${csvId}.csv`,
+      metadata: {
+        num_channels: channels.length,
+        freq_min: formOptions.freqMin,
+        freq_max: formOptions.freqMax,
+        modes: formOptions.selectedModes,
+        includes_repeaters: formOptions.includeRepeaters,
+        bands: formOptions.selectedBands,
+        location: formOptions.location,
+        llm_provider: formOptions.provider,
+        llm_model: formOptions.model,
+        validation_level: formOptions.validationLevel,
+        web_search_enabled: formOptions.webSearch,
+        duplicate_policy: formOptions.duplicatePolicy,
+        auto_assign_nfm: formOptions.autoAssignNfm
+      },
+      created_at: createdAt,
+      created_by: null,
+      download_count: 0,
+      tags,
+      preview_channels: channels.slice(0, 40),
+      channels
+    };
+
+    const frequencyEntries = channels.map((channel) => ({
+      id: generateEntityId('freq'),
+      list_id: csvId,
+      name: channel.name,
+      frequency: channel.frequency,
+      mode: channel.mode,
+      duplex: channel.duplex,
+      offset: channel.offset,
+      tone_mode: channel.tone_mode,
+      r_tone_freq: channel.r_tone_freq,
+      t_tone_freq: channel.t_tone_freq,
+      dtcs_code: channel.dtcs_code,
+      comment: channel.comment || '',
+      location_context: {
+        free_text: formOptions.location
+      },
+      service_tags: tags,
+      created_at: createdAt,
+      created_by: null
+    }));
 
     const firebase = await getFirebaseState();
     if (!firebase.available) {
       addLocalDirectoryEntry({ ...entry, csv_content: csvContent, source: 'local' });
+      addLocalFrequencyEntries(frequencyEntries);
       return { saved: false };
     }
 
     const user = firebase.auth ? firebase.auth.currentUser : null;
-    if (user?.uid) entry.created_by = user.uid;
+    if (user?.uid) {
+      entry.created_by = user.uid;
+      frequencyEntries.forEach((item) => {
+        item.created_by = user.uid;
+      });
+    }
 
     try {
       const fileRef = firebase.storage.ref().child(entry.csv_storage_path);
@@ -594,6 +821,9 @@ Return JSON only:
     }
 
     await firebase.db.collection('csv_directory').doc(csvId).set(entry);
+    await Promise.all(
+      frequencyEntries.map((item) => firebase.db.collection('frequency_directory').doc(item.id).set(item))
+    );
 
     if (user?.uid) {
       await firebase.db.collection('users').doc(user.uid).collection('saved_csvs').doc(csvId).set({
@@ -604,6 +834,7 @@ Return JSON only:
     }
 
     addLocalDirectoryEntry({ ...entry, source: 'firebase' });
+    addLocalFrequencyEntries(frequencyEntries);
     return { saved: true };
   }
 
@@ -922,7 +1153,8 @@ Return JSON only:
       const report = { invalid: [], duplicates: 0, validCount: 0 };
       const requestedModes = formOptions.selectedModes.map((mode) => normalizeMode(mode));
       const valid = rawChannels.map((item) => normalizeChannel(item, requestedModes, formOptions, report)).filter(Boolean);
-      const deduped = dedupeChannels(valid, report);
+      const withNfm = valid.map((channel) => maybeAssignNfm(channel, formOptions.autoAssignNfm));
+      const deduped = dedupeChannels(withNfm, report);
 
       debugContext.validation = {
         pre_validation_count: rawChannels.length,
@@ -938,7 +1170,9 @@ Return JSON only:
         throw strictError;
       }
 
-      const finalChannels = formOptions.numChannels === null ? deduped : deduped.slice(0, formOptions.numChannels);
+      const finalChannels = assignListItemIds(
+        formOptions.numChannels === null ? deduped : deduped.slice(0, formOptions.numChannels)
+      );
       report.validCount = finalChannels.length;
       if (!finalChannels.length) {
         const noValidError = new Error('No valid channels after validation.');
@@ -968,13 +1202,32 @@ Return JSON only:
         }
       };
 
+      currentWorkspace = {
+        id: generateEntityId('workspace'),
+        status: 'draft',
+        channels: finalChannels,
+        metadata: latestMeta.metadata,
+        options: {
+          duplicate_policy: formOptions.duplicatePolicy,
+          auto_assign_nfm: formOptions.autoAssignNfm,
+          rename_max_length: formOptions.renameMaxLength,
+          rename_style_prompt: formOptions.renameStylePrompt
+        },
+        updated_at: new Date().toISOString()
+      };
+      saveWorkspaceToSession(currentWorkspace);
+
       renderValidation(report, formOptions);
       renderPreview(finalChannels, metadata.listDescription, metadata.keywords);
       saveLatestToSession(latestMeta, csvContent);
-
-      const persisted = await persistGeneration(csvContent, finalChannels, formOptions, metadata);
       downloadButton.disabled = false;
-      setStatus(persisted.saved ? `Generated ${finalChannels.length} channels and saved to directory.` : `Generated ${finalChannels.length} channels (saved locally only).`);
+
+      const draftPersisted = await persistDraft(finalChannels, formOptions, metadata);
+      setStatus(
+        draftPersisted.saved
+          ? `Generated ${finalChannels.length} channels and saved draft to your account workspace.`
+          : `Generated ${finalChannels.length} channels. Draft kept in this browser session.`
+      );
     } catch (error) {
       const errorMessage = error?.message || 'Generation failed.';
       const rule = findErrorRule(errorMessage);
@@ -1041,6 +1294,182 @@ Return JSON only:
     setStatus('Loaded API key from account.');
   }
 
+  async function findListById(listId) {
+    const id = String(listId || '').trim();
+    if (!id) return null;
+
+    const firebase = await getFirebaseState();
+    if (firebase.available) {
+      const doc = await firebase.db.collection('csv_directory').doc(id).get();
+      if (doc.exists) {
+        const data = doc.data() || {};
+        const channels = Array.isArray(data.channels)
+          ? data.channels
+          : (Array.isArray(data.preview_channels) ? data.preview_channels : []);
+        return {
+          id: doc.id,
+          title: String(data.title || ''),
+          channels
+        };
+      }
+    }
+
+    try {
+      const local = JSON.parse(window.localStorage.getItem(STORAGE_KEYS.localDirectory) || '[]');
+      const match = (Array.isArray(local) ? local : []).find((item) => item.id === id);
+      if (!match) return null;
+      return {
+        id,
+        title: String(match.title || ''),
+        channels: Array.isArray(match.preview_channels) ? match.preview_channels : []
+      };
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  async function handleSaveDraft() {
+    if (!currentWorkspace?.channels?.length) {
+      setStatus('Generate or load a list first.');
+      return;
+    }
+
+    const formOptions = readFormOptions({ requireApiKey: false });
+    const metadata = {
+      title: String(currentWorkspace?.metadata?.title || `${formOptions.location} list`),
+      listDescription: String(currentWorkspace?.metadata?.list_description || formOptions.userPrompt || ''),
+      keywords: currentWorkspace?.metadata?.keywords || []
+    };
+
+    const result = await persistDraft(currentWorkspace.channels, formOptions, metadata);
+    setStatus(result.saved ? 'Draft saved to account workspace.' : 'Draft saved locally in this browser.');
+  }
+
+  async function handleMergeList() {
+    if (!currentWorkspace?.channels?.length) {
+      setStatus('Generate a list before merging.');
+      return;
+    }
+
+    const sourceId = String(mergeSourceIdInput?.value || '').trim();
+    if (!sourceId) {
+      setStatus('Enter a Merge Source List ID first.');
+      return;
+    }
+
+    setStatus('Loading merge source list…');
+    const source = await findListById(sourceId);
+    if (!source?.channels?.length) {
+      setStatus('Merge source list not found or has no channels to merge.');
+      return;
+    }
+
+    const strategy = String(duplicatePolicyInput?.value || 'keep_first');
+    const maxNameLength = Math.max(4, Math.min(16, Number(renameMaxLengthInput?.value) || 10));
+    const merged = mergeChannelLists(currentWorkspace.channels, source.channels, strategy, maxNameLength);
+    currentWorkspace.channels = merged;
+    currentWorkspace.updated_at = new Date().toISOString();
+    saveWorkspaceToSession(currentWorkspace);
+
+    latestCsvContent = buildCsv(merged);
+    if (latestMeta?.metadata) {
+      latestMeta.channels = merged;
+      latestMeta.metadata.count = merged.length;
+    }
+    renderPreview(merged, latestMeta?.metadata?.list_description || '', latestMeta?.metadata?.keywords || []);
+    downloadButton.disabled = false;
+    setStatus(`Merged ${source.channels.length} channels from ${source.id}. Workspace now has ${merged.length} channels.`);
+  }
+
+  async function handleRenameStations() {
+    if (!currentWorkspace?.channels?.length) {
+      setStatus('Generate or merge a list first.');
+      return;
+    }
+
+    const maxLength = Math.max(4, Math.min(16, Number(renameMaxLengthInput?.value) || 10));
+    const stylePrompt = String(renameStylePromptInput?.value || '').trim();
+    const channels = currentWorkspace.channels.map((channel) => ({ ...channel }));
+    const formOptions = readFormOptions({ requireApiKey: false });
+    let renamedChannels = channels;
+
+    if (formOptions.apiKey) {
+      try {
+        const renamePrompt = `You are standardising station/channel names for CHIRP.\n\nRENAME RULES:\n- Max length: ${maxLength}\n- Style: ALL CAPS\n- ${stylePrompt || 'Descriptive station names'}\n- Preserve uniqueness\n\nINPUT CHANNELS JSON:\n${JSON.stringify(channels.map((item) => ({ id: item.list_item_id, name: item.name, frequency: item.frequency, comment: item.comment }))).slice(0, 15000)}\n\nReturn JSON only: {\"channels\":[{\"id\":\"...\",\"name\":\"...\"}]}`;
+        const llmResult = await callLlmProvider({
+          provider: formOptions.provider,
+          api_key: formOptions.apiKey,
+          model: formOptions.model,
+          web_search: false,
+          prompt: renamePrompt
+        });
+        const parsed = parseJsonContent(llmResult.content);
+        const remap = new Map(
+          (Array.isArray(parsed?.channels) ? parsed.channels : []).map((item) => [String(item.id || ''), normalizeNameForLength(item.name, maxLength)])
+        );
+        renamedChannels = channels.map((channel) => ({
+          ...channel,
+          name: remap.get(String(channel.list_item_id || '')) || normalizeNameForLength(channel.name, maxLength)
+        }));
+      } catch (_error) {
+        renamedChannels = channels.map((channel) => ({
+          ...channel,
+          name: normalizeNameForLength(channel.name, maxLength)
+        }));
+      }
+    } else {
+      renamedChannels = channels.map((channel) => ({
+        ...channel,
+        name: normalizeNameForLength(channel.name, maxLength)
+      }));
+    }
+
+    const used = new Set();
+    renamedChannels = renamedChannels.map((channel) => {
+      let next = channel.name || 'CH';
+      let i = 2;
+      while (used.has(next)) {
+        const suffix = String(i);
+        next = `${next.slice(0, Math.max(1, maxLength - suffix.length))}${suffix}`.slice(0, maxLength);
+        i += 1;
+      }
+      used.add(next);
+      return { ...channel, name: next };
+    });
+
+    currentWorkspace.channels = renamedChannels;
+    currentWorkspace.updated_at = new Date().toISOString();
+    saveWorkspaceToSession(currentWorkspace);
+    latestCsvContent = buildCsv(renamedChannels);
+    if (latestMeta?.metadata) {
+      latestMeta.channels = renamedChannels;
+    }
+    renderPreview(renamedChannels, latestMeta?.metadata?.list_description || '', latestMeta?.metadata?.keywords || []);
+    setStatus(`Renamed ${renamedChannels.length} stations using max length ${maxLength}.`);
+  }
+
+  async function handleFinaliseList() {
+    if (!currentWorkspace?.channels?.length) {
+      setStatus('Generate or merge a list first.');
+      return;
+    }
+
+    const formOptions = readFormOptions({ requireApiKey: false });
+    const metadata = {
+      title: String(currentWorkspace?.metadata?.title || `${formOptions.location} list`),
+      listDescription: String(currentWorkspace?.metadata?.list_description || formOptions.userPrompt || ''),
+      keywords: currentWorkspace?.metadata?.keywords || []
+    };
+
+    const csvContent = buildCsv(currentWorkspace.channels);
+    const persisted = await persistFinalizedList(csvContent, currentWorkspace.channels, formOptions, metadata);
+    setStatus(
+      persisted.saved
+        ? `Finalised list saved to directory with frequency indexing (${currentWorkspace.channels.length} channels).`
+        : `Finalised list stored locally only (${currentWorkspace.channels.length} channels).`
+    );
+  }
+
   form.addEventListener('submit', handleGenerate);
   downloadButton.addEventListener('click', handleDownload);
   providerInput?.addEventListener('change', () => {
@@ -1061,6 +1490,10 @@ Return JSON only:
   loadSessionKeyButton?.addEventListener('click', () => void loadSessionKeyForProvider());
   saveAccountKeyButton?.addEventListener('click', () => void handleSaveAccountKey());
   loadAccountKeyButton?.addEventListener('click', () => void handleLoadAccountKey());
+  saveDraftButton?.addEventListener('click', () => void handleSaveDraft());
+  mergeListButton?.addEventListener('click', () => void handleMergeList());
+  renameListButton?.addEventListener('click', () => void handleRenameStations());
+  finaliseListButton?.addEventListener('click', () => void handleFinaliseList());
   refreshModelsButton?.addEventListener('click', () => void handleRefreshModels());
   retryGenerateButton?.addEventListener('click', () => {
     if (!generateButton.disabled) {
@@ -1101,6 +1534,17 @@ Return JSON only:
     applyTemplate(0);
     updateValidationDescription();
     restoreLatestFromSession();
+    currentWorkspace = restoreWorkspaceFromSession();
+    if (currentWorkspace?.channels?.length) {
+      renderPreview(
+        currentWorkspace.channels,
+        currentWorkspace?.metadata?.list_description || '',
+        currentWorkspace?.metadata?.keywords || []
+      );
+      latestCsvContent = buildCsv(currentWorkspace.channels);
+      downloadButton.disabled = false;
+      setStatus(`Restored workspace draft with ${currentWorkspace.channels.length} channels.`);
+    }
     await loadSessionKeyForProvider();
   })();
 })();
